@@ -1,0 +1,552 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>jobs</title>
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="{% static 'css/job-det.css' %}">
+<link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+<style>
+    #navbar {
+            transition: top 0.5s ease-in-out 0.2s;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        #navbar.hidden {
+            top: -100px;
+            /* Adjust this value based on your navbar height */
+        }
+    #loginButton {
+        width: 100%;
+        height: 50px;
+        background-color: #000000;
+        color: #ffffff;
+        padding: 15px 0;
+        font-size: 18px;
+        font-weight: 600;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+
+    }
+
+    .styled-list {
+        list-style-type: disc;
+        padding-left: 20px;
+    }
+
+    .styled-list li {
+        margin-bottom: 10px;
+    }
+
+    #loginButton:hover {
+        background-color: #ddd;
+        color: black;
+    }
+    body {
+    width: 100vw;
+    height: auto;
+    overflow-x: hidden;
+}
+
+.header-job {
+    height: 80vh;
+    width: 100vw;
+    position: sticky;
+    top: 0%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -12vh;
+    padding-top: 12vh;
+}
+
+.header-img-job {
+    width: 100vw;
+    height: 80vh;
+    position: absolute;
+    object-fit: cover;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    z-index: -1;
+    background-color: rgb(159, 153, 153);
+
+}
+
+.header-img-job img {
+    opacity: 0.6;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+
+
+
+
+
+
+
+
+
+</style>
+</head>
+
+<body>
+    <nav id="navbar">
+        <div class="navigation">
+            <div class="logo">
+                <a href="/home">
+                    <h1>Logo</h1>
+                </a>
+            </div>
+
+            <div class="menu_button">
+                <a href="/about">About</a>
+                <a href="/jobs">Jobs</a>
+                <a href="/contact">Contact</a>
+            </div>
+
+            <div>
+                <a class="login-btn" href="/login">Login</a>
+            </div>
+            <div class="menu_line" style="cursor: pointer;" onclick="toggleOverlay()">
+                <div style="width: 100%; height: 6px; border-top: 3px solid black;"></div>
+                <div style="width: 100%; height: 0.1px; border-top: 3px solid black;"></div>
+            </div>
+        </div>
+    </nav>
+    <div id="overlayMenu" class="overlayMenu">
+        <a href="javascript:void(0)" class="closebtn2" onclick="toggleOverlay()">&times;</a>
+        <div class="overlay-content">
+            <a href="/about">About</a>
+            <a href="/jobs">Jobs</a>
+            <a href="/contact">Contact</a>
+            <a href="/login">Login</a>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let lastScrollTop = 0;
+            const navbar = document.getElementById('navbar');
+
+            window.addEventListener('scroll', () => {
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (scrollTop > lastScrollTop) {
+                    // Scrolling down
+                    navbar.classList.add('hidden');
+                } else {
+                    // Scrolling up
+                    navbar.classList.remove('hidden');
+                }
+                lastScrollTop = scrollTop;
+            });
+        });
+
+    </script>
+
+    <script>
+        function toggleOverlay() {
+            var overlay = document.getElementById("overlayMenu");
+            if (overlay.style.height === "100vh") {
+                overlay.style.height = "0vh";
+            } else {
+                overlay.style.height = "100vh";
+            }
+        }
+
+    </script>
+
+    <!-- jobs section -->
+    <div style="position: relative; width: 100vw;height: auto;z-index: 0;">
+        <div style=" position: relative ; height: 80vh;">
+            <div class="header-job" style=" height: 30vh; position: sticky; top: 0%;">
+                <div class="header-img-job" style="height: 30vh;">
+                    <img style="filter: brightness(0.5) grayscale(50%);" src=" {%static 'images\job-img1.jpg'%}" alt="">
+                </div>
+                <div class="header-text-job"
+                    style=" height: 15vh;width: auto; box-shadow: none; background-color: transparent; margin:100px 0px ;">
+                    <img style="height: 15vh;" src="{% static 'images/' %}{{ job.image }}" alt="">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="job-detail" style="max-width: 100vw;">
+        <div class="jb-det-cont0">
+            <div class="jb-det-cont01">
+                {% if job.image %}
+                <img src="{% static 'job_images/' %}{{ job.image }}" alt="{{ job.job_title }}">
+                {% endif %}
+            </div>
+            <div class="jb-det-cont02">
+                <h1>{{ job.job_title }}</h1>
+                <p>{{ job.company_name }}</p>
+                <p style="font-weight: 100;">{{ job.location }} &nbsp; - &nbsp; {{job.remote}} &nbsp; - &nbsp;
+                    {{job.job_type}}</p>
+            </div>
+        </div>
+        <div class="jb-det-cont">
+
+            <div class="jb-det-cont1">
+                <div class="jb-det-cont11">
+                    <h1>Overview</h1>
+                    <p>{{ job.overview }}</p>
+                </div>
+                <div class="jb-det-cont12">
+                    <h1>Responsibilities</h1>
+                    <ul class="styled-list">
+                        {% for responsibility in responsibilities %}
+                        <li>{{ responsibility }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="jb-det-cont14">
+                    <h1>Requirements</h1>
+                    <ul class="styled-list">
+                        {% for requirement in requirements %}
+                        <li>{{ requirement }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="jb-det-cont13">
+                    <h1>Skills</h1>
+                    <ul class="styled-list">
+                        {% for skill in skills_needed %}
+                        <li>{{ skill }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="jb-det-cont2">
+                <div>
+                    <i class="fas fa-globe-americas" aria-hidden="true"></i> <!-- Use Font Awesome for icons -->
+                    <span>{{ job.location }}</span>
+                </div>
+
+                <!-- Second line: Text requesting CV submission -->
+                <div>
+                    <p style="font-weight: 100;">Please send us your detailed CV to apply for the job post</p>
+                </div>
+
+                <!-- Third line: Salary -->
+                <div>
+                    <h1 style="line-height: 10px;">{{ job.salary }}</h1>
+                    <p>Avg. salary</p>
+                </div>
+
+                <!-- New div block with contact details, job type, category, and last date -->
+                <div>
+                    <!-- Contact email -->
+                    <div>
+                        <div class="jb-icon">
+                            <div style="padding: 10px; background-color: #00000022; border-radius: 100%;"><i
+                                    class='far fa-envelope-open' style='font-size:25px'></i></div>
+                            <div class="jb-icon-cont">
+                                <h3>Contactdipesh@gmail.com</h3>
+                                <p>contact email</p>
+                            </div>
+                        </div>
+                        <div class="jb-icon">
+                            <div style="padding: 10px; background-color: #00000022; border-radius: 100%;"><i
+                                    class='far fa-clock' style='font-size:25px'></i></div>
+                            <div class="jb-icon-cont">
+                                <h3>{{ job.job_type }}</h3>
+                                <p>job type</p>
+                            </div>
+                        </div>
+                        <div class="jb-icon">
+                            <div style="padding: 10px; background-color: #00000022; border-radius: 100%;"><i
+                                    class='far fa-thumbs-up' style='font-size:25px'></i></div>
+                            <div class="jb-icon-cont">
+                                <h3>{{ job.experience_level}}</h3>
+                                <p>experence needed</p>
+                            </div>
+                        </div>
+                        <div class="jb-icon">
+                            <div style="padding: 10px; background-color: #00000022; border-radius: 100%;"><i
+                                    class='far fa-calendar-alt' style='font-size:25px'></i></div>
+                            <div class="jb-icon-cont">
+                                <h3>{{ job.last_day_to_apply }}</h3>
+                                <p>last date</p>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <!-- Apply button -->
+                <div class="button1" style="text-decoration: none;">
+                    <a style="text-decoration: none;" href="{% url 'apply_to_job' job.id %}">
+                        <button>Apply for this job</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col">
+                    <h4>company</h4>
+                    <ul>
+                        <li><a href="/about">about us</a></li>
+                        <li><a href="/jobs">our services</a></li>
+                        <li><a href="#">privacy policy</a></li>
+                        <li><a href="#">affiliate program</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>get help</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="about.html">about us</a></li>
+                        <li><a href="home.html">Trending companies</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>follow us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        gsap.from("nav", {
+            duration: 1,
+            opacity: 0,
+            y: -20, // Move the navbar down by 20 pixels
+            delay: 2.5, // Delay the animation by 1 second
+            ease: "power2.out" // Use a smooth ease
+        });
+        gsap.from(".logo, .menu_button, .login-btn", {
+            duration: 0.8,
+            opacity: 0,
+            stagger: 0.3, // Stagger the animations by 0.3 seconds
+            delay: 2.8, // Start the animations after 1.1 seconds
+            ease: "power2.out" // Use a smooth ease
+        });
+        gsap.from(".header-job .header-img-job img", {
+            opacity: 0,
+            scale: 1.1, // Start with smaller size
+            duration: 1.5,
+            ease: "power2.out" // Smooth easing
+        });
+
+        gsap.from(".header-text-job", {
+            scale: 0.95, // Start with smaller size
+            duration: 1,
+            delay: 0.5,
+            opacity: 0,
+            ease: "power2.out"
+        });
+
+        gsap.from(".header-job .heading, .header-job .subheading, .header-job .input-field , #loginButton", {
+            opacity: 0,
+            y: 50, // Move down slightly
+            duration: 0.8,
+            delay: 2, // Delay for the first set of elements
+            stagger: 0.2, // Small difference in motion and timing
+            ease: "power2.out" // Smooth easing
+        });
+        gsap.from(".container-jobpg", {
+            duration: 1,
+            opacity: 0,
+            y: 50, // Move down slightly
+            scrollTrigger: {
+                trigger: ".container-jobpg",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            }
+        });
+
+        gsap.from(".jobpg-logo, .jobpg-h , .jobpg-p , .jobpg-lc , .jobpg-v ", {
+            opacity: 0,
+            x: 20, // Move right slightly
+            duration: 1,
+            delay: 1,
+            stagger: 0.1, // Add stagger effect for smoother animation
+            scrollTrigger: {
+                trigger: ".joblisting",
+                start: "top 70%",
+                toggleActions: "play none none none"
+            }
+        });
+        gsap.from(".job-catg", {
+            opacity: 0,
+            y: 20, // Move down slightly
+            duration: 0.8,
+            scrollTrigger: {
+                trigger: ".job-catg",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            }
+        });
+        gsap.from(".Cot-jb", {
+            opacity: 0,
+            y: 20, // Move down slightly
+            duration: 0.8,
+            scrollTrigger: {
+                trigger: ".Cot-jb",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            }
+        });
+        gsap.from(".Cot-jb img , .Cot-jb h1 , .Cot-jb p ", {
+            opacity: 0,
+            y: 20, // Move down slightly
+            duration: 0.8,
+            stagger: 0.2,
+            delay: 0.6,
+            scrollTrigger: {
+                trigger: ".Cot-jb",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            }
+        });
+        gsap.from(".job-catg1", {
+            opacity: 0,
+            y: 20, // Move down slightly
+            duration: 0.8,
+            scrollTrigger: {
+                trigger: ".job-catg1",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            }
+        });
+        gsap.from("container-jobpg2", {
+            opacity: 0,
+            y: 20, // Move down slightly
+            duration: 1,
+            scrollTrigger: {
+                trigger: "container-jobpg2",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            }
+        });
+        gsap.from(".jobpg-logo2, .jobpg-h2 , .jobpg-p2 , .jobpg-lc2 ,.jobpg-v2", {
+            opacity: 0,
+            y: 20, // Move down slightly
+            duration: 0.8,
+            stagger: 0.2,
+            delay: 0.6,
+            scrollTrigger: {
+                trigger: ".jobpg-logo2",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            }
+        });
+        gsap.from(".jb-det-cont0", {
+            opacity: 0,
+            y: 50,
+            duration: 1,
+            ease: "power1.out",
+            delay: 0.2
+        });
+
+        // Animating each section with staggered animations
+        gsap.from(".jb-det-cont01 img", {
+            opacity: 0,
+            y: 50,
+            duration: 1,
+            ease: "power1.out",
+            delay: 0.4
+        });
+
+        gsap.from(".jb-det-cont02", {
+            opacity: 0,
+            x: 50,
+            duration: 1,
+            ease: "power1.out",
+            delay: 0.6
+        });
+
+        gsap.utils.toArray(".jb-det-cont1 > div").forEach((element, index) => {
+            gsap.from(element, {
+                opacity: 0,
+                y: 50,
+                duration: 1,
+                ease: "power1.out",
+                delay: 0.8 + index * 0.2
+            });
+        });
+
+        gsap.utils.toArray(".jb-det-cont2 > div").forEach((element, index) => {
+            gsap.from(element, {
+                opacity: 0,
+                y: 50,
+                duration: 1,
+                ease: "power1.out",
+                delay: 1.6 + index * 0.2
+            });
+        });
+
+
+        gsap.from(".footer-col", {
+            opacity: 0,
+            y: 50, // Move down slightly
+            duration: 1,
+            stagger: 0.3, // Stagger the animations by 0.3 seconds
+            scrollTrigger: {
+                trigger: ".footer",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            }
+        });
+
+        // Animation for footer links
+        gsap.from(".footer-col ul li", {
+            opacity: 0,
+            y: 30, // Move down slightly
+            duration: 1,
+            stagger: 0.2, // Stagger the animations by 0.2 seconds
+            scrollTrigger: {
+                trigger: ".footer",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            }
+        });
+
+        // Animation for social links
+        gsap.from(".social-links a", {
+            opacity: 0,
+            y: 20, // Move down slightly
+            duration: 1,
+            stagger: 0.2, // Stagger the animations by 0.2 seconds
+            scrollTrigger: {
+                trigger: ".footer",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            }
+        });
+    });
+</script>
+
+</html>

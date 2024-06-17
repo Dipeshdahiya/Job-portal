@@ -1,0 +1,1252 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home2.css' %}">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}" />
+    <!-- CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Boxicons CSS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+
+
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+    <style>
+        body {
+            padding: 5px 5px;
+        }
+
+        .landing-image-cont {
+            width: auto;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .play-button.active {
+            opacity: 0;
+            margin-top: 50%;
+            margin-left: 50%;
+            border-radius: 50%;
+            transition: opacity 0.1s ease,
+                /* Adding transition for scaling */
+        }
+
+        #navbar {
+            transition: top 0.5s ease-in-out 0.2s;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        #navbar.hidden {
+            top: -100px;
+            /* Adjust this value based on your navbar height */
+        }
+
+        .header-buttons {
+            display: flex;
+            flex-direction: row
+        }
+
+        @media(max-width:1300px) {
+            .profile-container {
+                display: none;
+            }
+
+            .review-block {
+                flex-direction: column;
+            }
+
+            .review-profile-image {
+                width: 120px;
+            }
+
+            .review-description {
+                font-size: 1em;
+                text-align: center;
+            }
+
+            .review-name {
+                font-size: 0.9em;
+                text-align: center;
+                color: gray;
+            }
+
+            .full-screen-div {
+                height: auto;
+            }
+
+            .centered-heading {
+                font-size: 2.2em;
+            }
+
+            .profile-container2 {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(100px, 50fr));
+                width: 80vw;
+                gap: 25px;
+                padding: 50px;
+                position: relative;
+            }
+
+            .profile-image {
+                position: static;
+                margin: 0 auto;
+                width: 100px;
+                height: 100px;
+            }
+
+            .landing-image-cont {
+                height: auto;
+                max-width: 100vw;
+            }
+
+            .header {
+                flex-direction: column;
+                height: 100vh;
+                overflow: hidden;
+            }
+
+            .landing-image {
+                width: 100vw;
+                height: 140vh;
+                margin-top: -85vh;
+                position: relative;
+                object-fit: cover;
+            }
+
+            .play-button {
+                margin-left: 45%;
+                margin-top: 15%;
+            }
+
+            .header_text {
+                height: 45vh;
+                width: 100%;
+                flex-direction: column;
+                margin-right: 0vw;
+                position: relative;
+                align-items: center;
+                justify-content: start;
+            }
+
+            .header_text h1 {
+                text-align: center;
+                width: 60%;
+                font-size: 40px;
+            }
+
+            .bullet_point {
+                display: none;
+            }
+
+            .header-buttons {
+                flex-direction: row;
+
+            }
+        }
+
+        @media(max-width:510px) {
+            .play-button {
+                margin-left: 40%;
+                margin-top: 30%;
+            }
+
+            .header_text h1 {
+                font-size: 35px;
+                width: 80%;
+            }
+
+            .header_button {
+                padding: 10px 0px;
+                width: 40vw;
+                margin-right: 10px;
+
+
+
+            }
+        }
+    </style>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <nav id="navbar">
+        <div class="navigation">
+            <div class="logo">
+                <a href="/home">
+                    <h1>Logo</h1>
+                </a>
+            </div>
+
+            <div class="menu_button">
+                <a href="/about">About</a>
+                <a href="/jobs">Jobs</a>
+                <a href="/contact">Contact</a>
+            </div>
+
+            <div>
+                <a class="login-btn" href="/login">Login</a>
+            </div>
+            <div class="menu_line" style="cursor: pointer;" onclick="toggleOverlay()">
+                <div style="width: 100%; height: 6px; border-top: 3px solid black;"></div>
+                <div style="width: 100%; height: 0.1px; border-top: 3px solid black;"></div>
+            </div>
+        </div>
+    </nav>
+    <div id="overlayMenu" class="overlayMenu">
+        <a href="javascript:void(0)" class="closebtn2" onclick="toggleOverlay()">&times;</a>
+        <div class="overlay-content">
+            <a href="/about">About</a>
+            <a href="/jobs">Jobs</a>
+            <a href="/contact">Contact</a>
+            <a href="/login">Login</a>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let lastScrollTop = 0;
+            const navbar = document.getElementById('navbar');
+
+            window.addEventListener('scroll', () => {
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (scrollTop > lastScrollTop) {
+                    // Scrolling down
+                    navbar.classList.add('hidden');
+                } else {
+                    // Scrolling up
+                    navbar.classList.remove('hidden');
+                }
+                lastScrollTop = scrollTop;
+            });
+        });
+
+    </script>
+
+    <script>
+        function toggleOverlay() {
+            var overlay = document.getElementById("overlayMenu");
+            if (overlay.style.height === "100vh") {
+                overlay.style.height = "0vh";
+            } else {
+                overlay.style.height = "100vh";
+            }
+        }
+
+    </script>
+    <div class="header" style="margin-top: 0vh;">
+        <div class="play-button" onclick="togglePopup()">
+            <div class="play-icon"></div>
+        </div>
+
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <span class="close" onclick="closePopup()">&times;</span>
+                <video src="..\static\video\home.mp4"></video>
+            </div>
+        </div>
+        <div class="landing-image-cont">
+            <img class="landing-image" src="..\static\images\home-background.jpg" alt="Landing Image">
+
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var video = document.querySelector('.popup-content video');
+
+                video.addEventListener('click', function () {
+                    if (video.paused) {
+                        video.play();
+                    } else {
+                        video.pause();
+                    }
+                });
+            });
+
+            function togglePopup() {
+                var button = document.querySelector('.play-button');
+                var popup = document.getElementById('popup');
+                var body = document.body;
+
+                if (!button.classList.contains('active')) {
+                    button.classList.add('active');
+                    popup.classList.add('open');
+                    body.classList.add('popup-open'); // Add class to body to disable scrolling
+                    playVideo(); // Play the video when opening the popup
+                } else {
+                    button.classList.remove('active');
+                    popup.classList.remove('open');
+                    body.classList.remove('popup-open'); // Remove class from body to enable scrolling
+                    pauseVideo(); // Pause the video when closing the popup
+                }
+            }
+
+            function closePopup() {
+                var button = document.querySelector('.play-button');
+                var popup = document.getElementById('popup');
+                var body = document.body;
+
+                button.classList.remove('active');
+                popup.classList.remove('open');
+                body.classList.remove('popup-open'); // Remove class from body to enable scrolling
+                pauseVideo(); // Pause the video when closing the popup
+            }
+
+            function playVideo() {
+                var video = document.querySelector('.popup-content video');
+                if (video.paused) {
+                    video.play();
+                }
+            }
+
+            function pauseVideo() {
+                var video = document.querySelector('.popup-content video');
+                if (!video.paused) {
+                    video.pause();
+                }
+            }
+
+        </script>
+
+        <div class="header_text">
+            <h1 class="header_text1">First step toward your journey of success</h1>
+            <div>
+                <div class="bullet_point">
+                    <div style="display:flex;flex-direction:row ;align-items: center;height: 50px;">
+                        <div class="bullet_text-pt"
+                            style="background-color:#ddd; border-radius: 50%;width:20px;height: 20px;margin-right: 20px;">
+                        </div>
+                        <div class="bullet_text">
+                            <p>Easy To Apply</p>
+                        </div>
+                    </div>
+                    <div style="display:flex;flex-direction:row ;align-items: center;height: 50px;">
+                        <div class="bullet_text-pt"
+                            style="background-color:#ddd;; border-radius: 50%;width:20px;height: 20px;margin-right: 20px;">
+                        </div>
+                        <div class="bullet_text">
+                            <p>Maximum Salary</p>
+                        </div>
+                    </div>
+                    <div style="display:flex;flex-direction:row ;align-items: center;height: 50px;">
+                        <div class="bullet_text-pt"
+                            style="background-color:#ddd;; border-radius: 50%;width:20px;height: 20px;margin-right: 20px;">
+                        </div>
+                        <div>
+                            <p>Remote Jobs</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-buttons">
+                    <div class="header_button1">
+                        <a class="header_button" href="contact.html">Need Help</a>
+                    </div>
+                    <div class="header_button1">
+                        <a class="header_button" href="jobs.html">View Jobs</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="benefits-section">
+        <div class="benefit-block">
+            <p class="benefit-value" data-value="110" data-symbol="k+">0k+</p>
+            <p class="benefit-description">Job Listings</p>
+        </div>
+        <div class="benefit-block">
+            <p class="benefit-value" data-value="500" data-symbol="k+">0k+</p>
+            <p class="benefit-description">Active Users</p>
+        </div>
+        <div class="benefit-block">
+            <p class="benefit-value" data-value="120" data-symbol="k+">0+</p>
+            <p class="benefit-description">Companies Hiring</p>
+        </div>
+        <div class="benefit-block">
+            <p class="benefit-value" data-value="95" data-symbol="%">0%</p>
+            <p class="benefit-description">User Satisfaction</p>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const benefitValues = document.querySelectorAll('.benefit-value');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.5
+            };
+
+            const countUp = (el) => {
+                const value = parseInt(el.getAttribute('data-value'), 10);
+                const symbol = el.getAttribute('data-symbol');
+                const duration = 2000;
+                const stepTime = Math.abs(Math.floor(duration / value));
+                let current = 0;
+                const increment = value / (duration / stepTime);
+
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= value) {
+                        clearInterval(timer);
+                        el.textContent = formatValue(value, symbol);
+                    } else {
+                        el.textContent = formatValue(Math.floor(current), symbol);
+                    }
+                }, stepTime);
+            };
+
+            const formatValue = (value, symbol) => {
+                if (symbol === 'k+') {
+                    return (value / 10).toFixed(1) + symbol;
+                }
+                return value + symbol;
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        countUp(entry.target);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            benefitValues.forEach(value => {
+                observer.observe(value);
+            });
+        });
+
+    </script>
+    <div
+        style=" background-color: rgb(255, 255, 255);display: flex;flex-direction: column;justify-content: center;align-items: center;max-width: 100vw;height: auto;padding-bottom: 50px;padding-top: 120px;">
+        <div class="find-job-section">
+            <h2>Find the Perfect Job</h2>
+            <p class="description">Explore all the jobs by categories and find the perfect and suitable <br> job that
+                you badly need.
+            </p>
+        </div>
+
+        <!-- Placeholder for the new block you will provide later -->
+        <div class="recent-job-listings">
+            {% for job in recent_job_listings %}
+            <div class="container-jobpg">
+                <div style="width: 100%;height: auto; display: flex;gap: 20px;justify-content: space-between;">
+
+                    <div class="jobpg-t">
+                        <div class="jobpg-h">
+                            <h1>{{ job.job_title }}</h1>
+                        </div>
+                        <div class="jobpg-p">
+                            <p>by <span
+                                    style="margin-left: 5px; color: blue;font-size: 1.2em;">{{job.company_name}}</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="jobpg-logo">
+                        {% if job.image %}
+                        <img src="{% static 'job_images/' %}{{ job.image }}" alt="{{ job.job_title }}">
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="jobpg-lc">
+                    <p>{{job.job_type}}</p>
+                    <p>{{ job.location }}</p>
+                    <p>{{job.remote}}</p>
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+        <div>
+            <a class="view-more-btn" href="/jobs">View more jobs</a>
+        </div>
+    </div>
+
+    <div class="company-logos-section" style="background-color: white;padding-bottom: 100px;">
+        <div class="company-description"
+            style="width: 60%;height: auto;margin-bottom: 50px;margin-top: 150px;padding: 0 100px ;">
+            <h1 style="font-size: 1.8em;font-weight: bold;">Trusted Partners: Leading Companies You Can <br> Build Your
+                Career With</h1>
+            <p style="font-size: 1.2em;color: rgba(0, 0, 0, 0.475);">Discover top-tier employers shaping the future of
+                work. From industry giants to innovative startups, our trusted partners offer diverse opportunities for
+                growth. Find your perfect fit and embark on a journey to success with our curated selection. Your dream
+                career starts here.</p>
+        </div>
+        <div class="company-logos">
+            <div class="logo-container logo-cont"><img src="{% static 'job_images/google.png' %}" alt="Google">
+                <p>Google</p>
+            </div>
+            <div class="logo-container logo-cont"><img src="{% static 'job_images/meta.png' %}" alt="Meta">
+                <p>Meta</p>
+            </div>
+            <div class="logo-container logo-cont"><img src="{% static 'job_images/ibm.png' %}" alt="IBM">
+                <p>IBM</p>
+            </div>
+            <div class="logo-container logo-cont"><img src="{% static 'job_images/airbnb.png' %}" alt="Airbnb">
+                <p>Airbnb</p>
+            </div>
+            <div class="logo-container logo-cont"><img src="{% static 'job_images/spotify.png' %}" alt="Spotify">
+                <p>Spotify</p>
+            </div>
+            <div class="logo-container logo-cont"><img src="{% static 'job_images/intel.png' %}" alt="Intel">
+                <p>Intel</p>
+            </div>
+            <div class="logo-container logo-cont"><img src="{% static 'job_images/adobe.png' %}" alt="Adobe">
+                <p>Adobe</p>
+            </div>
+            <div class="logo-container logo-cont"><img src="{% static 'job_images/pinterest.png' %}" alt="Pinterest">
+                <p>Pinterest</p>
+            </div>
+            <div class="logo-container logo-cont"><img src="{% static 'job_images/tesla.png' %}" alt="Tesla">
+                <p>Tesla</p>
+            </div>
+            <div class="logo-container logo-cont"><img src="{% static 'job_images/shaadi.png' %}" alt="Shaadi">
+                <p>Shaadi</p>
+            </div>
+            <div class="logo-container logo-cont"><img src="{% static 'job_images/netflix.png' %}" alt="netflix">
+                <p>Netflix</p>
+            </div>
+            <div class="logo-container logo-cont"><img src="{% static 'job_images/microsoft.png' %}" alt="Microsoft">
+                <p>Microsoft</p>
+            </div>
+            <div class="logo-container logo-cont"><img src="{% static 'job_images/linkedIn.png' %}" alt="Linkdin">
+                <p>Linkdin</p>
+            </div>
+            <div class="logo-container logo-cont"><img src="{% static 'job_images/facebook.png' %}" alt="Facebook">
+                <p>Facebook</p>
+            </div>
+            <div class="logo-container logo-cont"><img src="{% static 'job_images/hubspot.png' %}" alt="Hubspot">
+                <p>Hubspot</p>
+            </div>
+            <div class="logo-container logo-cont"><img src="{% static 'job_images/uber.png' %}" alt="Uber">
+                <p>Uber</p>
+            </div>
+            <div class="logo-container logo-cont"><img src="{% static 'job_images/salesforce.png' %}" alt="Salesforce">
+                <p>Salesforce</p>
+            </div>
+            <div class="logo-container logo-cont"><img src="{% static 'job_images/oracle.png' %}" alt="Oracle">
+                <p>Oracle</p>
+            </div>
+            <div class="logo-container logo-cont"><img src="{% static 'job_images/twitter.png' %}" alt="Twitter">
+                <p>Twitter</p>
+            </div>
+            <div class="logo-container logo-cont"><img src="{% static 'job_images/amazon.png' %}" alt="Amazon">
+                <p>Amazon</p>
+            </div>
+            <div class="logo-container logo-cont"><img src="{% static 'job_images/nvidia.png' %}" alt="Nvidia">
+                <p>Nvidia</p>
+            </div>
+            <div class="logo-container logo-cont"><img src="{% static 'job_images/apple.png' %}" alt="apple">
+                <p>Apple</p>
+            </div>
+
+        </div>
+        <div class="company-logos2">
+            <div class="logo-container logo-cont2"><img src="{% static 'job_images/apple.png' %}" alt="Apple">
+                <p>Apple</p>
+            </div>
+            <div class="logo-container logo-cont2"><img src="{% static 'job_images/nvidia.png' %}" alt="Nvidia">
+                <p>Nvidia</p>
+            </div>
+            <div class="logo-container logo-cont2"><img src="{% static 'job_images/amazon.png' %}" alt="Amazon">
+                <p>Amazon</p>
+            </div>
+            <div class="logo-container logo-cont2"><img src="{% static 'job_images/twitter.png' %}" alt="Twitter">
+                <p>Twitter</p>
+            </div>
+            <div class="logo-container logo-cont2"><img src="{% static 'job_images/oracle.png' %}" alt="Oracle">
+                <p>Oracle</p>
+            </div>
+            <div class="logo-container logo-cont2"><img src="{% static 'job_images/salesforce.png' %}" alt="Salesforce">
+                <p>Salesforce</p>
+            </div>
+            <div class="logo-container logo-cont2"><img src="{% static 'job_images/uber.png' %}" alt="Uber">
+                <p>Uber</p>
+            </div>
+            <div class="logo-container logo-cont2"><img src="{% static 'job_images/hubspot.png' %}" alt="Hubspot">
+                <p>Hubspot</p>
+            </div>
+            <div class="logo-container logo-cont2"><img src="{% static 'job_images/facebook.png' %}" alt="Facebook">
+                <p>Facebook</p>
+            </div>
+            <div class="logo-container logo-cont2"><img src="{% static 'job_images/linkedIn.png' %}" alt="Linkdin">
+                <p>Linkdin</p>
+            </div>
+            <div class="logo-container logo-cont2"><img src="{% static 'job_images/microsoft.png' %}" alt="Microsoft">
+                <p>Microsoft</p>
+            </div>
+            <div class="logo-container logo-cont2"><img src="{% static 'job_images/netflix.png' %}" alt="Netflix">
+                <p>Netflix</p>
+            </div>
+            <div class="logo-container logo-cont2"><img src="{% static 'job_images/shaadi.png' %}" alt="Shaadi">
+                <p>Shaadi</p>
+            </div>
+            <div class="logo-container logo-cont2"><img src="{% static 'job_images/tesla.png' %}" alt="Tesla">
+                <p>Tesla</p>
+            </div>
+            <div class="logo-container logo-cont2"><img src="{% static 'job_images/pinterest.png' %}" alt="Pinterest">
+                <p>Pinterest</p>
+            </div>
+            <div class="logo-container logo-cont2"><img src="{% static 'job_images/adobe.png' %}" alt="Adobe">
+                <p>Adobe</p>
+            </div>
+            <div class="logo-container logo-cont2"><img src="{% static 'job_images/intel.png' %}" alt="Intel">
+                <p>Intel</p>
+            </div>
+            <div class="logo-container logo-cont2"><img src="{% static 'job_images/spotify.png' %}" alt="Spotify">
+                <p>Spotify</p>
+            </div>
+            <div class="logo-container logo-cont2"><img src="{% static 'job_images/airbnb.png' %}" alt="Airbnb">
+                <p>Airbnb</p>
+            </div>
+            <div class="logo-container logo-cont2"><img src="{% static 'job_images/ibm.png' %}" alt="IBM">
+                <p>IBM</p>
+            </div>
+            <div class="logo-container logo-cont2"><img src="{% static 'job_images/meta.png' %}" alt="Meta">
+                <p>Meta</p>
+            </div>
+            <div class="logo-container logo-cont2"><img src="{% static 'job_images/google.png' %}" alt="Google">
+                <p>Google</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="full-screen-div">
+        <h1 class="centered-heading">What Our Users Are Saying</h1>
+        <div class="profile-container">
+            <img src="{% static 'profile_images/p1.jpg' %}" alt="Emily Johnson" class="profile-image" id="student1"
+                data-description="Thanks to this job portal, I found the perfect internship in my field of study. The application process was smooth, and I received timely responses from employers."
+                data-name="Emily Johnson">
+            <img src="{% static 'profile_images/p2.jpg' %}" alt="Michael Smith" class="profile-image" id="student2"
+                data-description="This platform helped me land my first job out of college. The job listings were relevant, and the interview tips were invaluable in preparing for the hiring process."
+                data-name="Michael Smith">
+            <img src="{% static 'profile_images/p3.jpg' %}" alt="Sophia Brown" class="profile-image" id="student3"
+                data-description="I highly recommend this job portal for anyone seeking remote job opportunities. I found a remote freelance position that fits perfectly with my schedule and skills."
+                data-name="Sophia Brown">
+            <img src="{% static 'profile_images/p4.jpg' %}" alt="Sarthak Kapoor" class="profile-image" id="student4"
+                data-description="The resume builder tool on this website was incredibly helpful. It guided me step-by-step in creating a professional resume that caught the attention of recruiters."
+                data-name="Sarthak Kapoor"">
+            <img src=" {% static 'profile_images/p5.jpg' %}" alt="Ethan Davis" class="profile-image" id="student5"
+                data-description="As a recent graduate, I was skeptical about online job portals. However, this site exceeded my expectations with its user-friendly interface and job matching algorithm."
+                data-name="Ethan Davis">
+            <img src="{% static 'profile_images/p6.jpg' %}" alt="Olivia Wilson" class="profile-image" id="student6"
+                data-description="I found my dream job through this portal. The job alerts feature kept me updated with new listings, and the application process was straightforward."
+                data-name="Olivia Wilson">
+            <img src="{% static 'profile_images/p7.jpg' %}" alt="Daniel Anderson" class="profile-image" id="student7"
+                data-description="This platform helped me transition smoothly into a new career path. The resources provided, such as interview tips and industry insights, were invaluable."
+                data-name="Daniel Anderson">
+            <img src="{% static 'profile_images/p8.jpg' %}" alt="Isabella Thompson" class="profile-image" id="student8"
+                data-description="I was impressed by the personalized job recommendations tailored to my skills and experience. It saved me a lot of time in searching for relevant job openings."
+                data-name="Isabella Thompson">
+            <img src="{% static 'profile_images/p9.jpg' %}" alt="Alexander Garcia" class="profile-image" id="student9"
+                data-description="The employer profiles on this portal gave me a good understanding of company culture and values. It helped me choose the right employer that aligns with my career goals."
+                data-name="Alexander Garcia">
+            <img src="{% static 'profile_images/p10.jpg' %}" alt="Ava Robinson" class="profile-image" id="student10"
+                data-description="This website helped me secure multiple job interviews within a short period. The tips on optimizing my LinkedIn profile were particularly useful."
+                data-name="Ava Robinson">
+            <img src="{% static 'profile_images/p11.jpg' %}" alt="Mia Hernandez" class="profile-image" id="student11"
+                data-description="I appreciate the responsive customer support team who promptly answered my queries regarding job applications. They were supportive throughout the hiring process."
+                data-name="Mia Hernandez">
+            <img src="{% static 'profile_images/p12.jpg' %}" alt="Benjamin Lee" class="profile-image" id="student12"
+                data-description="This job portal is a game-changer for job seekers. I found a full-time position that matches my skills perfectly. I couldn't be happier with the outcome."
+                data-name="Benjamin Lee">
+            <!-- Add more images as needed -->
+        </div>
+        <div class="profile-container2">
+            <img src="{% static 'profile_images/p1.jpg' %}" alt="Emily Johnson" class="profile-image" id="student1"
+                data-description="Thanks to this job portal, I found the perfect internship in my field of study. The application process was smooth, and I received timely responses from employers."
+                data-name="Emily Johnson">
+            <img src="{% static 'profile_images/p2.jpg' %}" alt="Michael Smith" class="profile-image" id="student2"
+                data-description="This platform helped me land my first job out of college. The job listings were relevant, and the interview tips were invaluable in preparing for the hiring process."
+                data-name="Michael Smith">
+            <img src="{% static 'profile_images/p3.jpg' %}" alt="Sophia Brown" class="profile-image" id="student3"
+                data-description="I highly recommend this job portal for anyone seeking remote job opportunities. I found a remote freelance position that fits perfectly with my schedule and skills."
+                data-name="Sophia Brown">
+            <img src="{% static 'profile_images/p4.jpg' %}" alt="Sarthak Kapoor" class="profile-image" id="student4"
+                data-description="The resume builder tool on this website was incredibly helpful. It guided me step-by-step in creating a professional resume that caught the attention of recruiters."
+                data-name="Sarthak Kapoor"">
+            <img src=" {% static 'profile_images/p5.jpg' %}" alt="Ethan Davis" class="profile-image" id="student5"
+                data-description="As a recent graduate, I was skeptical about online job portals. However, this site exceeded my expectations with its user-friendly interface and job matching algorithm."
+                data-name="Ethan Davis">
+            <img src="{% static 'profile_images/p6.jpg' %}" alt="Olivia Wilson" class="profile-image" id="student6"
+                data-description="I found my dream job through this portal. The job alerts feature kept me updated with new listings, and the application process was straightforward."
+                data-name="Olivia Wilson">
+            <img src="{% static 'profile_images/p7.jpg' %}" alt="Daniel Anderson" class="profile-image" id="student7"
+                data-description="This platform helped me transition smoothly into a new career path. The resources provided, such as interview tips and industry insights, were invaluable."
+                data-name="Daniel Anderson">
+            <img src="{% static 'profile_images/p8.jpg' %}" alt="Isabella Thompson" class="profile-image" id="student8"
+                data-description="I was impressed by the personalized job recommendations tailored to my skills and experience. It saved me a lot of time in searching for relevant job openings."
+                data-name="Isabella Thompson">
+            <img src="{% static 'profile_images/p9.jpg' %}" alt="Alexander Garcia" class="profile-image" id="student9"
+                data-description="The employer profiles on this portal gave me a good understanding of company culture and values. It helped me choose the right employer that aligns with my career goals."
+                data-name="Alexander Garcia">
+            <img src="{% static 'profile_images/p10.jpg' %}" alt="Ava Robinson" class="profile-image" id="student10"
+                data-description="This website helped me secure multiple job interviews within a short period. The tips on optimizing my LinkedIn profile were particularly useful."
+                data-name="Ava Robinson">
+            <img src="{% static 'profile_images/p11.jpg' %}" alt="Mia Hernandez" class="profile-image" id="student11"
+                data-description="I appreciate the responsive customer support team who promptly answered my queries regarding job applications. They were supportive throughout the hiring process."
+                data-name="Mia Hernandez">
+            <img src="{% static 'profile_images/p12.jpg' %}" alt="Benjamin Lee" class="profile-image" id="student12"
+                data-description="This job portal is a game-changer for job seekers. I found a full-time position that matches my skills perfectly. I couldn't be happier with the outcome."
+                data-name="Benjamin Lee">
+            <!-- Add more images as needed -->
+        </div>
+        <div class="review-block">
+            <img src="{% static 'profile_images/p1.jpg' %}" alt="Review Image" class="review-profile-image"
+                id="reviewImage">
+            <div class="review-content">
+                <p class="review-description" id="reviewDescription">Thanks to this job portal, I found the perfect
+                    internship in my field of study. The application process was smooth, and I received timely responses
+                    from employers.</p>
+                <p class="review-name" id="reviewName">- Emily Johnson</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to change the review image source, description, and name with bounce effect
+        function changeReviewContent(imageSrc, description, name) {
+            const reviewImage = document.getElementById('reviewImage');
+            const reviewDescription = document.getElementById('reviewDescription');
+            const reviewName = document.getElementById('reviewName');
+
+            // Toggle class to trigger bounce animation
+            reviewImage.classList.remove('bounce-animation');
+            void reviewImage.offsetWidth; // Trigger reflow to restart animation
+            reviewImage.classList.add('bounce-animation');
+
+            // Update image source and content
+            reviewImage.src = imageSrc;
+            reviewDescription.textContent = description;
+            reviewName.textContent = `- ${name}`;
+        }
+
+        // Function to handle scaling of profile images
+        function handleProfileSelection(selectedImage) {
+            // Get all profile images
+            const profileImages = document.querySelectorAll('.profile-image');
+
+            // Loop through each profile image
+            profileImages.forEach(image => {
+                // Reset scale of all profile images
+                image.style.transform = 'scale(1)';
+            });
+
+            // Set scale of the selected profile image to 1.1
+            selectedImage.style.transform = 'scale(1.1)';
+        }
+
+        // Add click event listeners to all profile images
+        document.querySelectorAll('.profile-image').forEach(image => {
+            image.addEventListener('click', () => {
+                const description = image.getAttribute('data-description');
+                const name = image.getAttribute('data-name');
+                changeReviewContent(image.src, description, name);
+                handleProfileSelection(image);
+            });
+        });
+
+    </script>
+
+    <!-- How It Works Section -->
+    <div class="how-it-works-section">
+        <h2>How it's work?</h2>
+        <div class="steps-container">
+            <div class="step">
+                <div class="icon"><i class='fas fa-user-tie'></i>
+                </div>
+                <h3>Create an Account</h3>
+                <p>Sign up easily: Register with your email or social media accounts to get started.</p>
+            </div>
+            <div class="arrow"><i class="fas fa-long-arrow-alt-right" style="color: gray;"></i></div>
+            <div class="step">
+                <div class="icon"><i class='fas fa-search'></i></div>
+                <h3>Search for Jobs</h3>
+                <p>Find the perfect match: Browse through our extensive job listings to find opportunities that suit
+                    your skills and interests.</p>
+            </div>
+            <div class="arrow"><i class="fas fa-long-arrow-alt-right" style="color: gray;"></i></div>
+            <div class="step">
+                <div class="icon"><i class="far fa-file-alt"></i></div>
+                <h3>Apply</h3>
+                <p>Submit your application: Apply directly to your chosen jobs with just a few clicks.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Questions & Answers Section -->
+    <div class="qa-section">
+        <h2>Question's & Answer's</h2>
+        <div class="qa-container">
+            <div class="qa-line"></div>
+            <div class="qa-item">
+                <div class="question">
+                    <span>How do I create an account?</span>
+                    <span class="icon plus-icon"></span>
+                </div>
+                <div class="answer">
+                    <p>Click on the "Sign Up" button at the top right corner of the homepage. Follow the instructions to
+                        register using your email or social media accounts. Once registered, you'll receive a
+                        confirmation email to verify your account.</p>
+                </div>
+            </div>
+            <div class="qa-line"></div>
+            <div class="qa-item">
+                <div class="question">
+                    <span>Is there a fee to use the job portal?</span>
+                    <span class="icon plus-icon"></span>
+                </div>
+                <div class="answer">
+                    <p>No, our job portal is completely free for job seekers. You can browse and apply for jobs without
+                        any charges. Employers may have different subscription plans and options based on their hiring
+                        needs.</p>
+                </div>
+            </div>
+            <div class="qa-line"></div>
+            <div class="qa-item">
+                <div class="question">
+                    <span>How can I search for jobs?</span>
+                    <span class="icon plus-icon"></span>
+                </div>
+                <div class="answer">
+                    <p>Once logged in, use the search bar on the homepage to filter jobs by title, location, industry,
+                        and more. You can also set up job alerts to receive notifications about new listings that match
+                        your criteria. Our advanced search options help you find the perfect job quickly.</p>
+                </div>
+            </div>
+            <div class="qa-line"></div>
+            <div class="qa-item">
+                <div class="question">
+                    <span>How do I apply for a job?</span>
+                    <span class="icon plus-icon"></span>
+                </div>
+                <div class="answer">
+                    <p>After finding a job that interests you, click on the job listing to view detailed information
+                        about the position. Then, click the "Apply" button to submit your application, which will
+                        usually require uploading your resume and cover letter. You can track your application status in
+                        your profile.</p>
+                </div>
+            </div>
+            <div class="qa-line"></div>
+            <div class="qa-item">
+                <div class="question">
+                    <span>Can I save jobs to apply later?</span>
+                    <span class="icon plus-icon"></span>
+                </div>
+                <div class="answer">
+                    <p>Yes, you can save jobs by clicking the "Save Job" button on the job listing page. These saved
+                        jobs will be stored in the "My Saved Jobs" section of your profile. You can revisit and apply
+                        for them whenever you're ready.</p>
+                </div>
+            </div>
+            <div class="qa-line"></div>
+            <div class="qa-item">
+                <div class="question">
+                    <span>How can I contact customer support?</span>
+                    <span class="icon plus-icon"></span>
+                </div>
+                <div class="answer">
+                    <p>If you need assistance, visit the "Contact Us" page on our website. You can fill out the contact
+                        form or use the provided email address or phone number to reach our support team. We're
+                        available to help with any questions or issues you may have.</p>
+                </div>
+            </div>
+            <div class="qa-line"></div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Toggle Q&A answers
+            document.querySelectorAll('.qa-item .question').forEach(question => {
+                question.addEventListener('click', () => {
+                    const qaItem = question.parentElement;
+                    const answer = qaItem.querySelector('.answer');
+                    const icon = question.querySelector('.icon');
+                    if (qaItem.classList.contains('expanded')) {
+                        qaItem.classList.remove('expanded');
+                        answer.style.maxHeight = '0';
+                        icon.classList.remove('minus-icon');
+                        icon.classList.add('plus-icon');
+                    } else {
+                        document.querySelectorAll('.qa-item.expanded .answer').forEach(ans => {
+                            ans.style.maxHeight = '0';
+                        });
+                        document.querySelectorAll('.qa-item.expanded .icon').forEach(ic => {
+                            ic.classList.remove('minus-icon');
+                            ic.classList.add('plus-icon');
+                        });
+                        document.querySelectorAll('.qa-item.expanded').forEach(item => item.classList.remove('expanded'));
+                        qaItem.classList.add('expanded');
+                        answer.style.maxHeight = answer.scrollHeight + 'px';
+                        icon.classList.remove('plus-icon');
+                        icon.classList.add('minus-icon');
+                    }
+                });
+            });
+        });
+
+    </script>
+    <div class="background-section">
+        <img src="{% static 'images/home2.jpeg' %}" alt="">
+        <div class="overlay">
+            <div class="content">
+                <h1 style="width: 98%;">Helps You Find a Job Faster</h1>
+                <p>Our platform connects you with top employers and makes the job search process smooth and efficient.
+                    Get started today and take the next step in your career.</p>
+                <a href="#" class="btn">Get Started</a>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Swiper JS -->
+    <script src="..\static\js\swiper-bundle.min.js"></script>
+    <!-- JavaScript -->
+    <script src="..\static\js\script.js"></script>
+
+
+    <!-- testimonial  -->
+
+
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col">
+                    <h4>company</h4>
+                    <ul>
+                        <li><a href="#">about us</a></li>
+                        <li><a href="#">our services</a></li>
+                        <li><a href="#">privacy policy</a></li>
+                        <li><a href="#">affiliate program</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>get help</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="about.html">about us</a></li>
+                        <li><a href="home.html">Trending companies</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>follow us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        gsap.from("nav", {
+            duration: 1,
+            opacity: 0,
+            y: -20, // Move the navbar down by 20 pixels
+            delay: 2.5, // Delay the animation by 1 second
+            ease: "power2.out" // Use a smooth ease
+        });
+        gsap.from(".logo, .menu_button, .login-btn", {
+            duration: 0.8,
+            opacity: 0,
+            stagger: 0.3, // Stagger the animations by 0.3 seconds
+            delay: 2.8, // Start the animations after 1.1 seconds
+            ease: "power2.out" // Use a smooth ease
+        });
+        gsap.from(".landing-image", {
+            duration: 1,
+            opacity: 0,
+            scale: 0.95,
+            ease: "power2.out"
+        });
+
+        // Header Text Animation
+        gsap.from(".header_text1", {
+            duration: 1,
+            opacity: 0,
+            y: 20,
+            ease: "power2.out",
+            delay: 0.5 // Delay the header text animation by 0.5 seconds
+        });
+
+        // Bullet Points Animation
+        gsap.from(".bullet_point", {
+            duration: 1,
+            opacity: 0,
+            ease: "power2.out",
+            delay: 1 // Delay the bullet points animation by 1 second
+        });
+
+        gsap.from(".header_button1", {
+            duration: 1,
+            opacity: 0,
+            y: 20,
+            stagger: 0.2,
+            ease: "power2.out",
+            delay: 1.5
+        });
+
+        // Play Button Animation
+        gsap.from(".play-button", {
+            duration: 1.5,
+            opacity: 0,
+            scale: 1.2,
+            ease: "power2.out",
+            delay: 2 // Delay the play button animation by 1.5 seconds
+        });
+        gsap.from(".find-job-section h2 ,.find-job-section p", {
+            opacity: 0,
+            y: 50,
+            duration: 0.5,
+            stagger: 0.2,
+            scrollTrigger: {
+                trigger: ".find-job-section",
+                start: "top 50%",
+                toggleActions: "play none none none"
+            }
+        });
+        gsap.from(".view-more-btn", {
+            opacity: 0,
+            y: 50,
+            duration: 0.5,
+            stagger: 0.2,
+            scrollTrigger: {
+                trigger: ".view-more-btn",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            }
+        });
+
+        gsap.from(".jobpg-logo, .jobpg-h , .jobpg-p , .jobpg-lc , .jobpg-v ", {
+            opacity: 0,
+            x: 20,
+            duration: 1,
+            delay: 0.2,
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: ".container-jobpg",
+                start: "top 70%",
+                toggleActions: "play none none none"
+            }
+        });
+        gsap.from(".company-description h1 ,.company-description p", {
+            opacity: 0,
+            y: 50,
+            duration: 0.5,
+            stagger: 0.2,
+            scrollTrigger: {
+                trigger: ".company-description",
+                start: "top 70%",
+                toggleActions: "play none none none"
+            }
+        });
+        gsap.from(".centered-heading", {
+            opacity: 0,
+            y: 20,
+            duration: 0.3,
+            stagger: 0.2,
+            scrollTrigger: {
+                trigger: ".centered-heading",
+                start: "top 70%",
+                toggleActions: "play none none none"
+            }
+        });
+
+        gsap.to(".logo-cont", {
+            xPercent: -800, // Move the logos to the left by 50% of their width
+            ease: "power1.inOut", // Smoother easing functio
+            scrollTrigger: {
+                trigger: ".company-logos-section",
+                start: "top 80%", // Start when the top of the section hits the top of the viewport
+                end: "bottom top", // End when the bottom of the section hits the top of the viewport
+                scrub: 2, // Smooth scrubbing
+                markers: false // Remove or set to false in production
+            }
+        });
+        gsap.to(".logo-cont2", {
+            xPercent: 800, // Move the logos to the left by 50% of their width
+            ease: "power1.inOut", // Smoother easing functio
+            scrollTrigger: {
+                trigger: ".company-logos-section",
+                start: "top 80%", // Start when the top of the section hits the top of the viewport
+                end: "bottom top", // End when the bottom of the section hits the top of the viewport
+                scrub: 2, // Smooth scrubbing
+                markers: false // Remove or set to false in production
+            }
+        });
+        gsap.to('.profile-image', {
+            keyframes: [
+                { opacity: 1, scale: 1.1, duration: 0.3 },
+                { scale: 1, duration: 0.3 }
+            ],
+            delay: 0.2,
+            stagger: 0.2,
+            scrollTrigger: {
+                trigger: ".profile-container",
+                start: "top 50%",
+                toggleActions: "play none none none"
+            }
+        });
+        gsap.to('.review-profile-image', {
+            keyframes: [
+                { opacity: 1, scale: 1.1, duration: 0.3 },
+                { scale: 1, duration: 0.3 }
+            ],
+
+            scrollTrigger: {
+                trigger: ".review-profile-image",
+                start: "top 70%",
+                toggleActions: "play none none none"
+            }
+        });
+        gsap.from(".review-description ,.review-name ", {
+            opacity: 0,
+            x: 50,
+            duration: 0.5,
+            delay: 0.2,
+            stagger: 0.2,
+            scrollTrigger: {
+                trigger: ".review-description",
+                start: "top 70%",
+                toggleActions: "play none none none"
+            }
+        });
+        gsap.from(".how-it-works-section h2", {
+            opacity: 0,
+            y: 20,
+            duration: 0.5,
+            delay: 0.2,
+            scrollTrigger: {
+                trigger: ".how-it-works-section",
+                start: "top 70%",
+                toggleActions: "play none none none"
+            }
+        });
+
+        gsap.from(".step .icon,.step h3,.step p, .arrow", {
+            opacity: 0,
+            x: 50,
+            duration: 0.3,
+            delay: 0.2,
+            stagger: 0.2,
+            scrollTrigger: {
+                trigger: ".step",
+                start: "top 70%",
+                toggleActions: "play none none none"
+            }
+        });
+        gsap.from(".qa-section h2", {
+            opacity: 0,
+            y: 20,
+            duration: 0.5,
+            delay: 0.2,
+            scrollTrigger: {
+                trigger: ".qa-section",
+                start: "top 70%",
+                toggleActions: "play none none none"
+            }
+        });
+        gsap.from(".qa-line,.qa-item .question span", {
+            opacity: 0,
+            x: 50,
+            duration: 0.5,
+            delay: 0.2,
+            stagger: 0.2,
+            scrollTrigger: {
+                trigger: ".qa-item",
+                start: "top 70%",
+                toggleActions: "play none none none"
+            }
+        });
+        gsap.from(".background-section img", {
+            opacity: 0,
+            scale: 1.1,
+            duration: 0.5,
+            scrollTrigger: {
+                trigger: ".background-section",
+                start: "top 90%",
+                toggleActions: "play none none none"
+            }
+        });
+
+        gsap.from('.content h1 ,.content p ,.content .btn', {
+            opacity: 0,
+            x: 50,
+            stagger: 0.2,
+            duration: 0.5,
+            delay: 0.2,
+            ease: "power1.out",
+            scrollTrigger: {
+                trigger: '.background-section',
+                start: 'top 50%',
+                toggleActions: 'play none none none'
+            }
+        });
+
+
+
+        gsap.from(".footer-col", {
+            opacity: 0,
+            y: 50, // Move down slightly
+            duration: 1,
+            stagger: 0.3, // Stagger the animations by 0.3 seconds
+            scrollTrigger: {
+                trigger: ".footer",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            }
+        });
+
+        // Animation for footer links
+        gsap.from(".footer-col ul li", {
+            opacity: 0,
+            y: 30, // Move down slightly
+            duration: 1,
+            stagger: 0.2, // Stagger the animations by 0.2 seconds
+            scrollTrigger: {
+                trigger: ".footer",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            }
+        });
+
+        // Animation for social links
+        gsap.from(".social-links a", {
+            opacity: 0,
+            y: 20, // Move down slightly
+            duration: 1,
+            stagger: 0.2, // Stagger the animations by 0.2 seconds
+            scrollTrigger: {
+                trigger: ".footer",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            }
+        });
+    });
+</script>
+
+</html>

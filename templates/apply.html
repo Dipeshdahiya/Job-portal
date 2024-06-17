@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Apply to Job</title>
+    <link rel="stylesheet" href="{% static 'css/apply.css' %}">
+    <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        #navbar {
+            transition: top 0.5s ease-in-out 0.2s;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        #navbar.hidden {
+            top: -100px;
+            /* Adjust this value based on your navbar height */
+        }
+        body{
+            overflow-x: hidden;
+        }
+        @media(max-width:1030px) {
+            .container{
+                margin-top: 50px;
+            }
+        }
+        @media(max-width:780px) {
+            .container{
+                margin-top: 250px;
+            }
+            .form-container{
+                flex-direction: column;
+            }
+            .input-container{
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background" >
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    <div class="container">
+        <div class="back-button">
+            <a href="/jobs" class="btn-back">Back to jobs <i class='fas fa-chevron-right' style='font-size:24px;'></i></a>
+        </div>
+        <h1 style="text-align: center;">Apply to {{ job.job_title }} at {{ job.company_name }}</h1>
+        <form method="post" enctype="multipart/form-data" id="applyForm">
+            {% csrf_token %}
+            <div class="form-container">
+                <div class="input-container">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="" required>
+
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="" required>
+
+                    <label for="phone_number">Phone Number</label>
+                    <input type="tel" id="phone_number" name="phone_number" placeholder="" required>
+
+                    <label for="age">Age</label>
+                    <input type="number" id="age" name="age" placeholder="" required>
+                </div>
+
+                <div class="input-container">
+                    <label for="gender">Gender</label>
+                    <select id="gender" name="gender" required>
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                        <option value="O">Other</option>
+                    </select>
+
+                    <label for="years_of_experience">Years of Experience</label>
+                    <input type="number" id="years_of_experience" name="years_of_experience" required>
+
+                    <label for="cv">Upload CV</label>
+                    <input type="file" id="cv" name="cv"/>
+                    <button type="button" id="custom-button">Select CV</button>
+                    <span id="custom-text">No file chosen, yet.</span>
+                    <label for="why_apply">Why do you want to apply for this job?</label>
+                    <textarea id="why_apply" name="why_apply" rows="4" required></textarea>
+                </div>
+            </div>
+
+            <p>If you are facing issues with submitting the form online, kindly answer the questions in a word document
+                and email us at <a href="mailto:contactdip2024@gmail.com">contactdip2024@gmail.com</a>.</p>
+
+            <button type="submit" id="applyButton">Apply</button>
+        </form>
+        <script>
+            const realFileBtn = document.getElementById("cv");
+            const customBtn = document.getElementById("custom-button");
+            const customTxt = document.getElementById("custom-text");
+
+            customBtn.addEventListener("click", function () {
+                realFileBtn.click();
+            });
+
+            realFileBtn.addEventListener("change", function () {
+                if (realFileBtn.value) {
+                    customTxt.innerHTML = realFileBtn.value.match(
+                        /[\/\\]([\w\d\s\.\-\(\)]+)$/
+                    )[1];
+                } else {
+                    customTxt.innerHTML = "No file chosen, yet.";
+                }
+            });
+
+        </script>
+    </div>
+
+</body>
+
+</html>

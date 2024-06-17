@@ -1,0 +1,334 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Design by foolishdeveloper.com -->
+    <title>Login</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <!--Stylesheet-->
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+    <style media="screen">
+        #navbar {
+            transition: top 0.5s ease-in-out 0.2s;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        #navbar.hidden {
+            top: -100px;
+            /* Adjust this value based on your navbar height */
+        }
+        *,
+        *:before,
+        *:after {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: rgb(253, 243, 228);
+            ;
+        }
+
+        .background {
+            width: 430px;
+            height: 520px;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            left: 50%;
+            top: 50%;
+        }
+
+        .background .shape {
+            height: 200px;
+            width: 200px;
+            position: absolute;
+            border-radius: 50%;
+        }
+
+        .shape:first-child {
+            background: linear-gradient(#373a3f,
+                    #1b1b1b);
+            left: -80px;
+            top: -80px;
+        }
+
+        .shape:last-child {
+            background: linear-gradient(to right,
+                    #efd89c,
+                    #ffdfb3);
+            right: -80px;
+            bottom: -150px;
+        }
+
+        form {
+            height:auto;
+            width: 400px;
+            background-color: rgba(255, 255, 255, 0.244);
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+            padding: 50px 35px;
+        }
+
+        form * {
+            font-family: 'Poppins', sans-serif;
+            color: #000000;
+            letter-spacing: 0.5px;
+            outline: none;
+            border: none;
+        }
+
+        form h3 {
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 42px;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 30px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        input {
+            display: block;
+            height: 50px;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.07);
+            border-radius: 3px;
+            padding: 0 10px;
+            margin-top: 8px;
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        ::placeholder {
+            color: #000000;
+        }
+
+        #loginButton {
+            margin-top: 50px;
+            width: 100%;
+            background-color: #000000;
+            color: #ffffff;
+            padding: 15px 0;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.5s;
+        }
+        
+        #loginButton:hover{
+            background-color: #ddd;
+            color: black;
+        }
+
+        .social {
+            margin-top: 30px;
+            display: flex;
+            cursor: pointer;
+        }
+
+        .social div {
+            background: rgb(0, 0, 0);
+            width: 150px;
+            border-radius: 3px;
+            padding: 5px 10px 10px 5px;
+            background-color: rgba(0, 0, 0, 0.056);
+            color: #000000;
+            text-align: center;
+            transition: 0.5s;
+        }
+
+        .social div:hover {
+            background-color: rgba(0, 0, 0, 0.296);
+        }
+
+        .social .fb {
+            margin-left: 25px;
+        }
+
+        .social i {
+            margin-right: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav id="navbar">
+        <div class="navigation">
+            <div class="logo">
+                <a href="/home">
+                    <h1>Logo</h1>
+                </a>
+            </div>
+
+            <div class="menu_button">
+                <a href="/about">About</a>
+                <a href="/jobs">Jobs</a>
+                <a href="/contact">Contact</a>
+            </div>
+
+            <div>
+                <a class="login-btn" href="/login">Login</a>
+            </div>
+            <div class="menu_line" style="cursor: pointer;" onclick="toggleOverlay()">
+                <div style="width: 100%; height: 6px; border-top: 3px solid black;"></div>
+                <div style="width: 100%; height: 0.1px; border-top: 3px solid black;"></div>
+            </div>
+        </div>
+    </nav>
+    <div id="overlayMenu" class="overlayMenu">
+        <a href="javascript:void(0)" class="closebtn2" onclick="toggleOverlay()">&times;</a>
+        <div class="overlay-content">
+            <a href="/about">About</a>
+            <a href="/jobs">Jobs</a>
+            <a href="/contact">Contact</a>
+            <a href="/login">Login</a>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let lastScrollTop = 0;
+            const navbar = document.getElementById('navbar');
+
+            window.addEventListener('scroll', () => {
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (scrollTop > lastScrollTop) {
+                    // Scrolling down
+                    navbar.classList.add('hidden');
+                } else {
+                    // Scrolling up
+                    navbar.classList.remove('hidden');
+                }
+                lastScrollTop = scrollTop;
+            });
+        });
+
+    </script>
+
+    <script>
+        function toggleOverlay() {
+            var overlay = document.getElementById("overlayMenu");
+            if (overlay.style.height === "100vh") {
+                overlay.style.height = "0vh";
+            } else {
+                overlay.style.height = "100vh";
+            }
+        }
+
+    </script>
+    
+    <div style="color: rgb(255, 255, 255);font-weight: bold; background-color: black;border-radius: 20px; margin-top: 10px;">{{ msg }}</div>
+    
+    
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    <form method="post" style="margin-top: 50px;">
+        {% csrf_token %}
+        <h3>Login Here</h3>
+    
+        {% if messages %}
+            {% for message in messages %}
+                <p style="color: red;">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" placeholder="Email or Phone" required>
+    
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" placeholder="Password" required>
+    
+        <button type="submit" id="loginButton">Login</button>
+        
+        <div class="Sign_up_line" style="margin-top: 20px;">
+            <span style="color: black;">Not logged in yet?</span>
+            <a href="{% url 'signup' %}" style="color: black; font-weight: bold; margin-left: 10px;">Sign Up</a>
+        </div>
+        
+        <div class="social">
+            <div class="go"><i class="fab fa-google"></i> Google</div>
+            <div class="fb"><i class="fab fa-facebook"></i> Facebook</div>
+        </div>
+    </form>
+    
+    
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        gsap.from("nav", {
+            duration: 1,
+            opacity: 0,
+            y: -20, // Move the navbar down by 20 pixels
+            delay: 2.5, // Delay the animation by 1 second
+            ease: "power2.out" // Use a smooth ease
+        });
+        gsap.from(".logo, .menu_button, .login-btn", {
+            duration: 0.8,
+            opacity: 0,
+            stagger: 0.3, // Stagger the animations by 0.3 seconds
+            delay: 2.8, // Start the animations after 1.1 seconds
+            ease: "power2.out" // Use a smooth ease
+        });
+        gsap.from(".background .shape", {
+            opacity: 0,
+            scale: 0.5, // Start with smaller size
+            duration: 1,
+            ease: "power2.out" // Smooth easing
+        });
+
+        gsap.from("form", {
+            opacity: 0,
+            scale: 0.5, // Start with smaller size
+            duration: 1,
+            ease: "power2.out" // Smooth easing
+        });
+        gsap.from(".Sign_up_line", {
+            opacity: 0,
+            duration: 1,
+            delay:2.5,
+            ease: "power2.out" // Smooth easing
+        });
+
+        gsap.from("form h3, form p, form label, form input, form button, form .social", {
+            opacity: 0,
+            y: 50, // Move down slightly
+            duration: 0.8,
+            delay: 0.5, // Delay for the first set of elements
+            stagger: 0.2, // Small difference in motion and timing
+            ease: "power2.out" // Smooth easing
+        });
+
+        gsap.from("form .social div", {
+            opacity: 0,
+            x: -50, // Move left slightly
+            duration: 0.8,
+            delay: 0.7, // Delay for the second set of elements
+            stagger: 0.2, // Small difference in motion and timing
+            ease: "power2.out" // Smooth easing
+        });
+    });
+</script>
+
+</html>

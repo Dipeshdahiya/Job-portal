@@ -1,0 +1,344 @@
+{% load static %} <!-- Load the static template tag -->
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Responsive Contact Us Form | CodingLab</title>
+    <link rel="stylesheet" href="{% static 'css/contact.css' %}">
+    <!-- Use the static template tag for static file paths -->
+    <!-- Fontawesome CDN Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <!-- Use the static template tag for static file paths -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+    <script src="{% static 'js/home.js' %}"></script> <!-- Use the static template tag for static file paths -->
+    <style>
+        #navbar {
+            transition: top 0.5s ease-in-out 0.2s;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        #navbar.hidden {
+            top: -100px;
+            /* Adjust this value based on your navbar height */
+        }
+        .right-side .button {
+            display: inline-block;
+            margin-top: 12px;
+        }
+
+        .right-side .button .button1 {
+            color: #fff;
+            font-size: 18px;
+            outline: none;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            background: #000000;
+            cursor: pointer;
+            transition: all 0.5s ease;
+        }
+
+        .right-side .button .button1:hover {
+            background: #ddd;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <nav id="navbar">
+        <div class="navigation">
+            <div class="logo">
+                <a href="/home">
+                    <h1>Logo</h1>
+                </a>
+            </div>
+
+            <div class="menu_button">
+                <a href="/about">About</a>
+                <a href="/jobs">Jobs</a>
+                <a href="/contact">Contact</a>
+            </div>
+
+            <div>
+                <a class="login-btn" href="/login">Login</a>
+            </div>
+            <div class="menu_line" style="cursor: pointer;" onclick="toggleOverlay()">
+                <div style="width: 100%; height: 6px; border-top: 3px solid black;"></div>
+                <div style="width: 100%; height: 0.1px; border-top: 3px solid black;"></div>
+            </div>
+        </div>
+    </nav>
+    <div id="overlayMenu" class="overlayMenu" >
+        <a href="javascript:void(0)" class="closebtn2" onclick="toggleOverlay()">&times;</a>
+        <div class="overlay-content">
+            <a href="/about">About</a>
+            <a href="/jobs">Jobs</a>
+            <a href="/contact">Contact</a>
+            <a href="/login">Login</a>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let lastScrollTop = 0;
+            const navbar = document.getElementById('navbar');
+
+            window.addEventListener('scroll', () => {
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (scrollTop > lastScrollTop) {
+                    // Scrolling down
+                    navbar.classList.add('hidden');
+                } else {
+                    // Scrolling up
+                    navbar.classList.remove('hidden');
+                }
+                lastScrollTop = scrollTop;
+            });
+        });
+
+    </script>
+
+    <script>
+        function toggleOverlay() {
+            var overlay = document.getElementById("overlayMenu");
+            if (overlay.style.height === "100vh") {
+                overlay.style.height = "0vh";
+            } else {
+                overlay.style.height = "100vh";
+            }
+        }
+
+    </script>
+    <div style="width:100vw ;display: flex;justify-content: center;align-items: center; position: relative;">
+        <div class="container-contact">
+            <div class="content">
+                <div class="left-side">
+                    <div class="address details">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div class="topic">Address</div>
+                        <div class="text-one">20/4, Bank Colony</div>
+                        <div class="text-two">Rohtak, Haryana</div>
+                    </div>
+                    <div class="phone details">
+                        <i class="fas fa-phone-alt"></i>
+                        <div class="topic">Phone</div>
+                        <div class="text-one">+917496801160</div>
+                        <div class="text-two">+918295874160</div>
+                    </div>
+                    <div class="email details">
+                        <i class="fas fa-envelope"></i>
+                        <div class="topic">Email</div>
+                        <div class="text-one">brijeshdahiya@gmail.com</div>
+                        <div class="text-two">dipesh3783.be22@chitkara.edu.in</div>
+                    </div>
+                </div>
+                <div class="right-side" style="padding: 50px 0px;">
+                    <div class="topic-text" style="font-size: 30px;margin-bottom: 10px;">Contact us</div>
+                    <p>If you have any work from me or any types of quries related to my tutorial, you can send me
+                        message from here. It's my pleasure to help you.</p>
+                        <form action="{% url  'contact' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="input-box">
+                                <input type="text" name="name"  placeholder="Enter your name" required>
+                            </div>
+                            <div class="input-box">
+                                <input type="email" name="email" placeholder="Enter your email" required>
+                            </div>
+                            <div class="input-box message-box">
+                                <textarea name="message"  placeholder="Enter your message" required></textarea>
+                            </div>
+                            <div class="button">
+                                <button type="submit" class="button1">Send Now</button>
+                            </div>
+                        </form>
+                        
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="menu_page " id="contentDiv" style="margin-top:20px ;">
+
+        <div class="menu_page_text">
+            <a href="/about">About</a>
+        </div>
+        <div class="menu_page_text">
+            <a href="/jobs">Jobs</a>
+        </div>
+        <div class="menu_page_text">
+            <a href="/contact">Contact</a>
+        </div>
+
+    </div>
+    <script>
+        function toggleDiv() {
+            var contentDiv = document.getElementById('contentDiv');
+
+            if (contentDiv.classList.contains('hidden')) {
+                contentDiv.classList.remove('hidden');
+                contentDiv.classList.add('visible');
+            } else {
+                contentDiv.classList.remove('visible');
+                contentDiv.classList.add('hidden');
+            }
+        }
+    </script>
+    <footer class="footer" style="margin-top: 100px;">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col">
+                    <h4>company</h4>
+                    <ul>
+                        <li><a href="/about">about us</a></li>
+                        <li><a href="/jobs">our services</a></li>
+                        <li><a href="#">privacy policy</a></li>
+                        <li><a href="#">affiliate program</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>get help</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="/about">about us</a></li>
+                        <li><a href="/home">Trending companies</a></li>
+                        <li><a href="/contact">contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>follow us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        gsap.from("nav", {
+            duration: 1,
+            opacity: 0,
+            y: -20, // Move the navbar down by 20 pixels
+            delay: 2.5, // Delay the animation by 1 second
+            ease: "power2.out" // Use a smooth ease
+        });
+        gsap.from(".logo, .menu_button, .login-btn", {
+            duration: 0.8,
+            opacity: 0,
+            stagger: 0.3, // Stagger the animations by 0.3 seconds
+            delay: 2.8, // Start the animations after 1.1 seconds
+            ease: "power2.out" // Use a smooth ease
+        });
+
+        gsap.from(".container-contact", {
+            opacity: 0,
+            scale: 0.5, // Start with smaller size
+            duration: 1,
+            ease: "power2.out" // Smooth easing
+        });
+
+        gsap.from(".left-side .details", {
+            opacity: 0,
+            y: 50, // Move down slightly
+            duration: 0.8,
+            delay: 0.5, // Delay for the first set of elements
+            stagger: 0.2, // Small difference in motion and timing
+            ease: "power2.out" // Smooth easing
+        });
+
+        gsap.from(".right-side", {
+            opacity: 0,
+            y: 50, // Move down slightly
+            duration: 0.8,
+            delay: 0.5, // Delay for the first set of elements
+            ease: "power2.out" // Smooth easing
+        });
+
+        gsap.from(".right-side .topic-text", {
+            opacity: 0,
+            y: 50, // Move down slightly
+            duration: 0.8,
+            delay: 0.8, // Delay for the second set of elements
+            ease: "power2.out" // Smooth easing
+        });
+
+        gsap.from(".right-side p", {
+            opacity: 0,
+            y: 50, // Move down slightly
+            duration: 0.8,
+            delay: 1, // Delay for the third set of elements
+            ease: "power2.out" // Smooth easing
+        });
+
+        gsap.from(".right-side .input-box", {
+            opacity: 0,
+            y: 50, // Move down slightly
+            duration: 0.8,
+            delay: 1.2, // Delay for the fourth set of elements
+            stagger: 0.2, // Small difference in motion and timing
+            ease: "power2.out" // Smooth easing
+        });
+
+        gsap.from(".right-side .button", {
+            opacity: 0,
+            y: 50, // Move down slightly
+            duration: 0.8,
+            delay: 1.4, // Delay for the fifth set of elements
+            ease: "power2.out" // Smooth easing
+        });
+
+        gsap.from(".footer-col", {
+            opacity: 0,
+            y: 50, // Move down slightly
+            duration: 1,
+            stagger: 0.3, // Stagger the animations by 0.3 seconds
+            scrollTrigger: {
+                trigger: ".footer",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            }
+        });
+
+        // Animation for footer links
+        gsap.from(".footer-col ul li", {
+            opacity: 0,
+            y: 30, // Move down slightly
+            duration: 1,
+            stagger: 0.2, // Stagger the animations by 0.2 seconds
+            scrollTrigger: {
+                trigger: ".footer",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            }
+        });
+
+        // Animation for social links
+        gsap.from(".social-links a", {
+            opacity: 0,
+            y: 20, // Move down slightly
+            duration: 1,
+            stagger: 0.2, // Stagger the animations by 0.2 seconds
+            scrollTrigger: {
+                trigger: ".footer",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            }
+        });
+    });
+</script>
+
+</html>

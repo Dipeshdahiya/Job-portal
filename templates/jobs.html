@@ -1,0 +1,615 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jobs</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jobs.css' %}">
+    
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+    <style>
+        #navbar {
+            transition: top 0.5s ease-in-out 0.2s;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        #navbar.hidden {
+            top: -100px;
+            /* Adjust this value based on your navbar height */
+        }
+        #loginButton {
+            width: 100%;
+            height: 50px;
+            background-color: #000000;
+            color: #ffffff;
+            padding: 15px 0;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+
+        }
+
+        #loginButton:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .message {
+            transition: opacity 0.5s ease, max-height 0.5s ease;
+            overflow: hidden;
+            max-height: 200px;
+            /* Adjust based on the expected height of your messages */
+        }
+
+        .message.hide {
+            opacity: 0;
+            max-height: 0;
+            padding: 0;
+            margin: 0;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .step-links {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .step-links a,
+        .step-links span {
+            padding: 8px 20px;
+            text-decoration: none;
+            color: black;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .step-links a:hover {
+            background-color: #dbdbdb;
+        }
+
+        .step-links .current {
+            font-weight: bold;
+            background-color: #000000;
+            color: white;
+        }
+
+        .step-links .prev,
+        .step-links .next {
+            position: absolute;
+        }
+
+        .step-links .prev {
+            left: 0;
+        }
+
+        .step-links .next {
+            right: 0;
+        }
+
+        .step-links .disabled {
+            color: #999;
+            cursor: not-allowed;
+        }
+
+        .Cot-jb {
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .Cot-jb.active {
+            background-color: #f0f0f0;
+            border: 2px solid #333;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const message = document.querySelector('.message');
+            if (message) {
+                setTimeout(() => {
+                    message.classList.add('hide');
+                    setTimeout(() => {
+                        message.style.display = 'none';
+                    }, 500); // Hide after the transition (0.5s)
+                }, 5000); // Start hiding after 5 seconds
+            }
+        });
+    </script>
+    {% if messages %}
+    <div class="message"
+        style="font-weight: bolder;font-size: 20px; background-color: #dff0d8; padding: 10px; border: 1px solid #d6e9c6; color: #3c763d; display: flex;justify-content: center;align-items: center;">
+        {% for message in messages %}
+        <p>{{ message |safe }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <nav id="navbar">
+        <div class="navigation">
+            <div class="logo">
+                <a href="/home">
+                    <h1>Logo</h1>
+                </a>
+            </div>
+
+            <div class="menu_button">
+                <a href="/about">About</a>
+                <a href="/jobs">Jobs</a>
+                <a href="/contact">Contact</a>
+            </div>
+
+            <div>
+                <a class="login-btn" href="/login">Login</a>
+            </div>
+            <div class="menu_line" style="cursor: pointer;" onclick="toggleOverlay()">
+                <div style="width: 100%; height: 6px; border-top: 3px solid black;"></div>
+                <div style="width: 100%; height: 0.1px; border-top: 3px solid black;"></div>
+            </div>
+        </div>
+    </nav>
+    <div id="overlayMenu" class="overlayMenu">
+        <a href="javascript:void(0)" class="closebtn2" onclick="toggleOverlay()">&times;</a>
+        <div class="overlay-content">
+            <a href="/about">About</a>
+            <a href="/jobs">Jobs</a>
+            <a href="/contact">Contact</a>
+            <a href="/login">Login</a>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let lastScrollTop = 0;
+            const navbar = document.getElementById('navbar');
+
+            window.addEventListener('scroll', () => {
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (scrollTop > lastScrollTop) {
+                    // Scrolling down
+                    navbar.classList.add('hidden');
+                } else {
+                    // Scrolling up
+                    navbar.classList.remove('hidden');
+                }
+                lastScrollTop = scrollTop;
+            });
+        });
+
+    </script>
+
+    <script>
+        function toggleOverlay() {
+            var overlay = document.getElementById("overlayMenu");
+            if (overlay.style.height === "100vh") {
+                overlay.style.height = "0vh";
+            } else {
+                overlay.style.height = "100vh";
+            }
+        }
+
+    </script>
+    {% if msg %}
+    <div
+        style="color: rgb(255, 255, 255);font-weight: bold; background-color: black;border-radius: 20px; margin-top: 10px;">
+        {{ msg }}</div>
+    {% endif %}
+    <!-- jobs section -->
+    <div style="position: relative; width: 100vw;height: 172vh;">
+        <div class="header-job">
+            <div class="header-img-job">
+                <div style="position: relative;width: 100%;height: 100%;">
+                    <img src="..\static\images\job-img.jpg" alt="">
+                </div>
+            </div>
+            <div class="header-text-job" >
+                <div class="heading" style="font-size: 30px;border-bottom: solid black 1px;">Great Job<p
+                        style="font-weight: 100;margin-top: 0px;letter-spacing: 1.5px;">Great Talent</p>
+                </div>
+                <div
+                    style="display:flex; flex-direction:column; justify-content: left;text-align: left;text-align: center;margin-top: -5%;margin-bottom: 5%;">
+                    <div class="subheading" style="font-size: 22px;">Explore our job listings now and find the
+                        opportunity that’s waiting for you. Your future is bright, and it starts here.</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div style="display: flex; justify-content: center; align-items: center;flex-direction: column;margin-top: -80vh;position: relative; background-color: white;padding:150px 50px;">
+        <div class="job-catg" style="margin-bottom: 50px;">
+            <h1>Job Categories</h1>
+        </div>
+        <div class="Categories-jb">
+            {% for category_info in predefined_categories %}
+                {% with category=category_info.0 category_name=category_info.1 %}
+                    <div class="Categories-jb{{ forloop.counter }} Cot-jb" data-category="{{ category }}">
+                        <img src="../static/other-img/{{ forloop.counter }}.png" alt="">
+                        <h1>{{ category_name }}</h1>
+                        {% for category_count in categories %}
+                            {% if category_count.category == category %}
+                                <p>{{ category_count.job_count }} jobs available</p>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endwith %}
+            {% endfor %}
+        </div>
+        
+        <div class="full-job-list-cont">
+            <div style="position: relative;">
+                <div class="joblisting">
+                    <div style="margin-bottom: 50px;">
+                        <h1>Jobs to Apply: </h1>
+                    </div>
+
+                    {% for job in page_obj %}
+                    <div class="container-jobpg" data-category="{{ job.category }}">
+                        <div class="jobpg-logo">
+                            {% if job.image %}
+                            <img src="{% static 'job_images/' %}{{ job.image }}" alt="{{ job.job_title }}">
+                            {% endif %}
+                        </div>
+                        <div class="jobpg-t">
+                            <div class="jobpg-h">
+                                <h1>{{ job.job_title }}</h1>
+                            </div>
+                            <div class="jobpg-p">
+                                <p>{{ job.company_name }}</p>
+                            </div>
+                        </div>
+                        <div class="jobpg-lc">
+                            <p>{{ job.location }}</p>
+                        </div>
+                        <div class="jobpg-v">
+                            <a href="{% url 'job_detail' job.pk %}" class="view-more-btn">View More</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    <div class="pagination">
+                        <span class="step-links">
+                            {% if page_obj.has_previous %}
+                            <a href="?page={{ page_obj.previous_page_number }}{% if selected_category %}&category={{ selected_category|urlencode }}{% endif %}"
+                                class="prev">Prev</a>
+                            {% else %}
+                            <span class="disabled prev">Prev</span>
+                            {% endif %}
+
+                            {% for num in page_obj.paginator.page_range %}
+                            {% if page_obj.number == num %}
+                            <span class="current">{{ num }}</span>
+                            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <a
+                                href="?page={{ num }}{% if selected_category %}&category={{ selected_category|urlencode }}{% endif %}">
+                                {{ num }}</a>
+                                {% endif %}
+                                {% endfor %}
+
+                                {% if page_obj.has_next %}
+                                <a href="?page={{ page_obj.next_page_number }}{% if selected_category %}&category={{ selected_category|urlencode }}{% endif %}"
+                                    class="next">Next</a>
+                                {% else %}
+                                <span class="disabled next">Next</span>
+                                {% endif %}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="recent-job-listings-cont">
+                <div class="job-catg1" style="margin-bottom: 50px;">
+                    <h1>Recent Jobs: </h1>
+                </div>
+                <div class="recent-job-listings">
+                    {% for job in recent_job_listings %}
+                    <div class="container-jobpg2">
+                        <div class="jobpg-logo2">
+                            {% if job.image %}
+                            <img src="{% static 'job_images/' %}{{ job.image }}" alt="{{ job.job_title }}">
+                            {% endif %}
+                        </div>
+                        <div class="jobpg-t2">
+                            <div class="jobpg-h2">
+                                <h1>{{ job.job_title }}</h1>
+                            </div>
+                        </div>
+                        <div class="jobpg-lc2">
+                            <p>{{ job.location }}</p>
+                        </div>
+                        <div class="jobpg-v2">
+                            <a href="{% url 'job_detail' job.pk %}" class="view-more-btn">View More</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col">
+                    <h4>company</h4>
+                    <ul>
+                        <li><a href="/about">about us</a></li>
+                        <li><a href="/jobs">our services</a></li>
+                        <li><a href="#">privacy policy</a></li>
+                        <li><a href="#">affiliate program</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>get help</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="about.html">about us</a></li>
+                        <li><a href="home.html">Trending companies</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>follow us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const categoryElements = document.querySelectorAll('.Cot-jb');
+
+            // Function to remove active class from all category elements
+            function removeActiveClass() {
+                categoryElements.forEach(el => el.classList.remove('active'));
+            }
+
+            categoryElements.forEach(categoryElement => {
+                categoryElement.addEventListener('click', function () {
+                    const selectedCategory = this.getAttribute('data-category');
+                    const url = new URL(window.location.href);
+
+                    // Toggle active class
+                    if (this.classList.contains('active')) {
+                        this.classList.remove('active');
+                        url.searchParams.delete('category');
+                    } else {
+                        removeActiveClass();
+                        this.classList.add('active');
+                        if (selectedCategory === 'all') {
+                            url.searchParams.delete('category');
+                        } else {
+                            url.searchParams.set('category', selectedCategory);
+                        }
+                    }
+
+                    url.searchParams.delete('page');  // Reset to first page
+                    window.location.href = url.toString();
+                });
+            });
+
+            // Mark the current selected category as active based on the URL parameter
+            const params = new URLSearchParams(window.location.search);
+            const currentCategory = params.get('category');
+            if (currentCategory) {
+                document.querySelector(`.Cot-jb[data-category="${currentCategory}"]`).classList.add('active');
+            } else {
+                document.querySelector(`.Cot-jb[data-category="all"]`).classList.add('active');
+            }
+        });
+
+
+    </script>
+
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        gsap.registerPlugin(ScrollTrigger);
+
+        window.onload = function () {
+            gsap.from("nav", {
+                duration: 1,
+                opacity: 0,
+                y: -20,
+                delay: 0.5,
+                ease: "power2.out"
+            });
+
+            gsap.from(".logo, .menu_button, .login-btn", {
+                duration: 0.8,
+                opacity: 0,
+                stagger: 0.3,
+                delay: 0.8,
+                ease: "power2.out"
+            });
+
+            gsap.from(".header-job .header-img-job img", {
+                opacity: 0,
+                scale: 1.1,
+                duration: 1.5,
+                ease: "power2.out"
+            });
+
+            gsap.from(".header-text-job", {
+                scale: 0.95,
+                duration: 1,
+                delay: 0.5,
+                opacity: 0,
+                ease: "power2.out"
+            });
+
+            gsap.from(".header-job .heading, .header-job .subheading, .header-job .input-field , #loginButton", {
+                opacity: 0,
+                y: 50,
+                duration: 0.8,
+                delay: 1,
+                stagger: 0.2,
+                ease: "power2.out"
+            });
+
+            gsap.from(".container-jobpg", {
+                duration: 1,
+                opacity: 0,
+                y: 50,
+                scrollTrigger: {
+                    trigger: ".container-jobpg",
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                }
+            });
+
+            gsap.from(".jobpg-logo, .jobpg-h , .jobpg-p , .jobpg-lc , .jobpg-v ", {
+                opacity: 0,
+                x: 20,
+                duration: 1,
+                delay: 1,
+                stagger: 0.1,
+                scrollTrigger: {
+                    trigger: ".joblisting",
+                    start: "top 70%",
+                    toggleActions: "play none none none"
+                }
+            });
+
+            gsap.from(".job-catg", {
+                opacity: 0,
+                y: 20,
+                duration: 0.8,
+                scrollTrigger: {
+                    trigger: ".job-catg",
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                }
+            });
+
+            gsap.from(".Cot-jb", {
+                opacity: 0,
+                y: 20,
+                duration: 0.8,
+                scrollTrigger: {
+                    trigger: ".Cot-jb",
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                }
+            });
+
+            gsap.from(".Cot-jb img , .Cot-jb h1 , .Cot-jb p ", {
+                opacity: 0,
+                y: 20,
+                duration: 0.8,
+                stagger: 0.2,
+                delay: 0.6,
+                scrollTrigger: {
+                    trigger: ".Cot-jb",
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                }
+            });
+
+            gsap.from(".job-catg1", {
+                opacity: 0,
+                y: 20,
+                duration: 0.8,
+                scrollTrigger: {
+                    trigger: ".job-catg1",
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                }
+            });
+
+            gsap.from(".container-jobpg2", {
+                opacity: 0,
+                y: 20,
+                duration: 1,
+                scrollTrigger: {
+                    trigger: ".container-jobpg2",
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                }
+            });
+
+            gsap.from(".jobpg-logo2, .jobpg-h2 , .jobpg-p2 , .jobpg-lc2 ,.jobpg-v2", {
+                opacity: 0,
+                y: 20,
+                duration: 0.8,
+                stagger: 0.2,
+                delay: 0.6,
+                scrollTrigger: {
+                    trigger: ".jobpg-logo2",
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                }
+            });
+
+            gsap.from(".footer-col", {
+                opacity: 0,
+                y: 50,
+                duration: 1,
+                stagger: 0.3,
+                scrollTrigger: {
+                    trigger: ".footer",
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                }
+            });
+
+            gsap.from(".footer-col ul li", {
+                opacity: 0,
+                y: 30,
+                duration: 1,
+                stagger: 0.2,
+                scrollTrigger: {
+                    trigger: ".footer",
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                }
+            });
+
+            gsap.from(".social-links a", {
+                opacity: 0,
+                y: 20,
+                duration: 1,
+                stagger: 0.2,
+                scrollTrigger: {
+                    trigger: ".footer",
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                }
+            });
+
+            // Refresh ScrollTrigger to make sure all triggers are recalculated
+            ScrollTrigger.refresh();
+        };
+    });
+</script>
+
+</html>

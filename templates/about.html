@@ -1,0 +1,290 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="{% static 'css/about2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+    <script src="{% static 'js/home.js' %}"></script>
+    <style>
+        #navbar {
+            transition: top 0.5s ease-in-out 0.2s;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        #navbar.hidden {
+            top: -100px;
+            /* Adjust this value based on your navbar height */
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="navigation">
+            <div class="logo">
+                <a href="/home">
+                    <h1>Logo</h1>
+                </a>
+            </div>
+
+            <div class="menu_button">
+                <a href="/about">About</a>
+                <a href="/jobs">Jobs</a>
+                <a href="/contact">Contact</a>
+            </div>
+
+            <div>
+                <a class="login-btn" href="/login">Login</a>
+            </div>
+            <div class="menu_line" style="cursor: pointer;" onclick="toggleOverlay()">
+                <div style="width: 100%; height: 6px; border-top: 3px solid black;"></div>
+                <div style="width: 100%; height: 0.1px; border-top: 3px solid black;"></div>
+            </div>
+        </div>
+    </nav>
+    <div id="overlayMenu" class="overlayMenu">
+        <a href="javascript:void(0)" class="closebtn2" onclick="toggleOverlay()">&times;</a>
+        <div class="overlay-content">
+            <a href="/about">About</a>
+            <a href="/jobs">Jobs</a>
+            <a href="/contact">Contact</a>
+            <a href="/login">Login</a>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let lastScrollTop = 0;
+            const navbar = document.getElementById('navbar');
+
+            window.addEventListener('scroll', () => {
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (scrollTop > lastScrollTop) {
+                    // Scrolling down
+                    navbar.classList.add('hidden');
+                } else {
+                    // Scrolling up
+                    navbar.classList.remove('hidden');
+                }
+                lastScrollTop = scrollTop;
+            });
+        });
+
+    </script>
+
+    <script>
+        function toggleOverlay() {
+            var overlay = document.getElementById("overlayMenu");
+            if (overlay.style.height === "100vh") {
+                overlay.style.height = "0vh";
+            } else {
+                overlay.style.height = "100vh";
+            }
+        }
+
+    </script>
+    <div class="responsive-container-block bigContainer" style="margin-top: 12vh;">
+        <div class="responsive-container-block Container">
+            <div class="allText bottomText">
+                <p class="text-blk headingText" style="font-size:50px ; margin-bottom: 40px;">
+                    About Us
+                </p>
+                <p class="text-blk subHeadingText">
+                    Connecting Careers: Your Gateway to Job Excellence and Trending Opportunities </p>
+                <p class="text-blk description">
+                    At Connecting Careers, we are your dedicated job portal, streamlining your journey to professional
+                    success. Specializing in job application hiring, we empower both employers and candidates by
+                    fostering efficient connections. Our platform stands as a beacon for trending jobs, ensuring you
+                    stay ahead in the dynamic job market. With a commitment to excellence, we prioritize your career
+                    aspirations, making job hunting and hiring processes seamless. </p>
+                <a class="explore" href="/contact">
+                    Our Services
+                </a>
+            </div>
+            <div class="ultimateImg">
+                <img class="mainImg" src="..\static\images\about.jpg">
+                <div class="purpleBox">
+                    <p class="purpleText">
+
+                        Innovative job portal navigated effortlessly, found dream job effortlessly! </p>
+                    <img class="stars" src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/mp5.svg">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="responsive-container-block bigContainer" style="margin-bottom: 100px;margin-top: 50px;">
+        <div class="responsive-container-block Container bottomContainer">
+            <div class="allText bottomText" style="margin-left: 30px;">
+                <p class="text-blk headingText" style="font-size:50px ; margin-bottom: 40px;">
+                    How we hire
+                </p>
+                <p class="text-blk subHeadingText">
+                    Streamlined Recruitment for Exceptional Talent </p>
+                <p class="text-blk description">
+                    Discover a seamless hiring process at Connecting Careers. We leverage advanced technologies and
+                    insightful methodologies to identify exceptional talent efficiently. Our commitment to precision
+                    ensures that employers find the right candidates while candidates navigate their career journey with
+                    clarity and confidence. </p>
+            </div>
+            <div class="ultimateImg">
+                <img class="mainImg" src="..\static\images\about2.jpeg">
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col">
+                    <h4>company</h4>
+                    <ul>
+                        <li><a href="/about">about us</a></li>
+                        <li><a href="/jobs">our services</a></li>
+                        <li><a href="#">privacy policy</a></li>
+                        <li><a href="#">affiliate program</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>get help</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="about.html">about us</a></li>
+                        <li><a href="home.html">Trending companies</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>follow us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        gsap.from("nav", {
+            duration: 1,
+            opacity: 0,
+            y: -20, // Move the navbar down by 20 pixels
+            delay: 2.5, // Delay the animation by 1 second
+            ease: "power2.out" // Use a smooth ease
+        });
+        gsap.from(".logo, .menu_button, .login-btn", {
+            duration: 0.8,
+            opacity: 0,
+            stagger: 0.3, // Stagger the animations by 0.3 seconds
+            delay: 2.8, // Start the animations after 1.1 seconds
+            ease: "power2.out" // Use a smooth ease
+        });
+
+        gsap.from(".headingText", {
+            opacity: 0,
+            x: -20, // Move down slightly
+            duration: 1
+        });
+        gsap.from(".subHeadingText", {
+            opacity: 0,
+            x: -40, // Move down slightly
+            duration: 1,
+            delay:0.5
+        });
+        gsap.from(".description", {
+            opacity: 0,
+            duration: 1.5,
+            delay:1
+        });
+        gsap.from(".mainImg", {
+            opacity: 0,
+            scale: 1.05, // Increase size initially
+            duration: 1,
+            delay:0.5
+        });
+        gsap.from(".purpleBox", {
+            opacity: 0,
+            scale: 0.95, // Increase size initially
+            y:20,
+            duration: 0.8,
+            delay:1.5
+        });
+        gsap.from(".explore", {
+            opacity: 0,
+            scale: 1.1, // Increase size initially
+            duration: 1,
+            delay:2
+        });
+        gsap.from(".purpleText", {
+            opacity: 0,
+            x:20,
+            duration: 0.8,
+            delay:2.3
+        });
+        gsap.from(".stars", {
+            opacity: 0,
+            x:20,
+            duration: 0.8,
+            delay:2.5
+        });
+
+        gsap.from(".footer-col", {
+            opacity: 0,
+            y: 50, // Move down slightly
+            duration: 1,
+            stagger: 0.3, // Stagger the animations by 0.3 seconds
+            scrollTrigger: {
+                trigger: ".footer",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            }
+        });
+
+        // Animation for footer links
+        gsap.from(".footer-col ul li", {
+            opacity: 0,
+            y: 30, // Move down slightly
+            duration: 1,
+            stagger: 0.2, // Stagger the animations by 0.2 seconds
+            scrollTrigger: {
+                trigger: ".footer",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            }
+        });
+
+        // Animation for social links
+        gsap.from(".social-links a", {
+            opacity: 0,
+            y: 20, // Move down slightly
+            duration: 1,
+            stagger: 0.2, // Stagger the animations by 0.2 seconds
+            scrollTrigger: {
+                trigger: ".footer",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            }
+        });
+    });
+</script>
+</html>

@@ -1,0 +1,483 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jobs</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jobs.css' %}">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Boxicons CSS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+
+
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+    <style>
+        .container-jobpg {
+            width: 80vw;
+            height: 20vh;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            border-radius: 5px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.212); /* Set the box shadow */
+            transition: all 0.5s ease-in-out;
+        }
+
+        .container-jobpg .jobpg-logo {
+            width: 10vh;
+            height: 100%;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container-jobpg .jobpg-logo img {
+            width: auto;
+            height: 10vh;
+
+        }
+
+        .container-jobpg .jobpg-t {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 300px;
+            height: 100%;
+        }
+
+        .container-jobpg .jobpg-t h1 {
+            font-size: 30px;
+            line-height: 30px;
+            margin-bottom: 0%;
+        }
+
+        .container-jobpg .jobpg-t p {
+            font-size: 16px;
+        }
+
+        .container-jobpg .jobpg-lc {
+            width: auto;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .container-jobpg .jobpg-v {
+            width: auto;
+            height: 100%;
+            padding-right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container-jobpg .jobpg-v a {
+            width: 150px;
+            height: 6vh;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: black;
+            text-decoration: none;
+            color: white;
+            transition: all 0.5s ease-in-out;
+        }
+
+        .container-jobpg .jobpg-v a:hover {
+            background-color: rgba(255, 255, 255, 0.438);
+
+            color: black;
+        }
+
+        .container-jobpg:hover {
+            background-color: rgb(255, 238, 227);
+        }
+        /* Popup styles */
+.popup-content {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 9999;
+}
+
+.popup-content-inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+/* Adjust this according to your styling */
+.popup-content-inner h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.popup-content-inner p {
+    margin-bottom: 5px;
+}
+
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="navigation">
+            <div class="logo">
+                <a href="/home">
+                    <h1>Logo</h1>
+                </a>
+            </div>
+            <li class="search">
+                <span class=" search-icon material-icons" onclick="toggleSearch()">search</span>
+                <div class="search">
+                    <input id="searchInput" class="search-input" type="search" placeholder="Search..."
+                        oninput="searchSuggestions()">
+                    <div id="searchResults" class="search-results hidden"></div>
+                </div>
+            </li>
+            <div class="menu_button">
+                <a href="/about">About</a>
+                <a href="/jobs">Jobs</a>
+                <a href="/contact">Contact</a>
+            </div>
+            <div class="menu_line" onclick="toggleDiv()">
+                <div style="width: 100%; height: 0.1px; border-top: 3px solid black;"></div>
+                <div style="width: 100%; height: 0.1px; border-top: 3px solid black;"></div>
+                <div style="width: 100%; height: 0.1px; border-top: 3px solid black;"></div>
+            </div>
+            <script>
+                // Sample data for search suggestions
+                var searchData = [
+                    "Google",
+                    "Facebook",
+                    "Twitter",
+                    "LinkedIn",
+                    // Add more suggestions as needed
+                ];
+
+                function toggleSearch() {
+                    var searchInput = document.getElementById("searchInput");
+                    searchInput.style.display = (searchInput.style.display === "none" || searchInput.style.display === "") ? "block" : "none";
+                }
+
+                function searchSuggestions() {
+                    var searchInput = document.getElementById("searchInput");
+                    var searchResults = document.getElementById("searchResults");
+
+                    var searchTerm = searchInput.value.toLowerCase();
+
+                    // Clear previous suggestions
+                    searchResults.innerHTML = "";
+
+                    // Filter suggestions based on the input
+                    var filteredResults = searchData.filter(function (result) {
+                        return result.toLowerCase().includes(searchTerm);
+                    });
+
+                    // Display the filtered results
+                    filteredResults.forEach(function (result) {
+                        var item = document.createElement("div");
+                        item.classList.add("search-item");
+                        item.textContent = result;
+
+                        // Add click event to redirect on suggestion click
+                        item.addEventListener("click", function () {
+                            redirectToPage(result);
+                        });
+
+                        searchResults.appendChild(item);
+                    });
+
+                    // Show or hide the search results based on the input
+                    if (filteredResults.length > 0) {
+                        searchResults.classList.remove("hidden");
+                    } else {
+                        searchResults.classList.add("hidden");
+                    }
+                }
+
+                function redirectToPage(result) {
+                    // You can customize this based on your page structure and naming
+                    var pageName = result.toLowerCase() + ".html";
+                    window.location.href = "google.html";
+                }
+            </script>
+            <div>
+                <a class="login-btn" href="/login">Login</a>
+            </div>
+        </div>
+    </nav>
+    <div class="menu_page " id="contentDiv">
+        <div class="menu_page_text">
+            <a href="/about">About</a>
+        </div>
+        <div class="menu_page_text">
+            <a href="/jobs">Jobs</a>
+        </div>
+        <div class="menu_page_text">
+            <a href="/contact">Contact</a>
+        </div>
+
+    </div>
+    <script>
+        function toggleDiv() {
+            var contentDiv = document.getElementById('contentDiv');
+
+            if (contentDiv.classList.contains('hidden')) {
+                contentDiv.classList.remove('hidden');
+                contentDiv.classList.add('visible');
+            } else {
+                contentDiv.classList.remove('visible');
+                contentDiv.classList.add('hidden');
+            }
+        }
+    </script>
+    <div style="position: relative; width: 100vw;height: 172vh;">
+        <div class="header-job">
+            <div class="header-img-job">
+                <img src="..\static\images\job-img1.jpg" alt="">
+            </div>
+            <div class="header-text-job">
+                <div class="heading">Job Category</div>
+                <div style="display:flex; flex-direction:column; justify-content: left;text-align: left;">
+                    <div class="subheading">Job Filter*</div>
+                    <input type="text" class="input-field" placeholder="Enter job filter">
+                    <div class="subheading">Company*</div>
+                    <input type="text" class="input-field" placeholder="Enter company name">
+                    <button type="submit" id="loginButton">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <div>
+            <h1>Job Listings</h1>
+        </div>
+
+        <div class="joblisting">
+            {% for job in job_listings %}
+            <!-- <div class="job-block">
+                    <h2>{{ job.job_title }}</h2>
+                    <p>{{ job.company_name }}</p>
+                    <p>Description: {{ job.description }}</p>
+                    <p>Responsibilities: {{ job.responsibilities }}</p>
+                    <p>Skills Needed: {{ job.skills_needed }}</p>
+                    <p>Salary: {{ job.salary }}</p>
+                    <p>Date Added: {{ job.date_added }}</p>
+                    <p>Contact Information: {{ job.contact_information }}</p>
+                    
+                </div> -->
+            <div class="container-jobpg">
+                <div class="jobpg-logo">
+                    {% if job.image %}
+                    <img src="{% static 'job_images/' %}{{ job.image }}" alt="{{ job.job_title }}">
+                    {% endif %}
+                </div>
+                <div class="jobpg-t">
+                    <div class="jobpg-h">
+                        <h1>{{job.job_title}}</h1>
+                    </div>
+                    <div class="jobpg-p">
+                        <p>{{ job.company_name }}</p>
+                    </div>
+                </div>
+                <div class="jobpg-lc">
+                    <p>{{job.location}}</p>
+                </div>
+                <div class="jobpg-v">
+                    <a  href="#" class="view-more-btn">View More</a>
+                </div>
+                <div class="popup-content">
+                    <div class="popup-content-inner">
+                        <span class="close-btn">&times;</span>
+                        <h2>{{ job.job_title }}</h2>
+                        <p>{{ job.description }}</p>
+                        <p>{{ job.responsibilities }}</p>
+                        <p>{{ job.skills_needed }}</p>
+                        <p>{{ job.salary }}</p>
+                        <p>{{ job.date_added }}</p>
+                        <p>{{ job.contact_information }}</p>
+                    </div>
+                </div>
+            </div>
+            
+            {% endfor %}
+        </div>
+    </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const viewMoreButtons = document.querySelectorAll(".view-more-btn");
+    const popupContents = document.querySelectorAll(".popup-content");
+
+    viewMoreButtons.forEach((button, index) => {
+        button.addEventListener("click", function(event) {
+            event.preventDefault();
+            popupContents[index].style.display = "block";
+        });
+    });
+
+    const closeButtons = document.querySelectorAll(".close-btn");
+
+    closeButtons.forEach((button) => {
+        button.addEventListener("click", function() {
+            this.closest(".popup-content").style.display = "none";
+        });
+    });
+});
+
+</script>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col">
+                    <h4>company</h4>
+                    <ul>
+                        <li><a href="/about">about us</a></li>
+                        <li><a href="/jobs">our services</a></li>
+                        <li><a href="#">privacy policy</a></li>
+                        <li><a href="#">affiliate program</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>get help</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="about.html">about us</a></li>
+                        <li><a href="home.html">Trending companies</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>follow us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        gsap.from("nav", {
+            duration: 1,
+            opacity: 0,
+            y: -20, // Move the navbar down by 20 pixels
+            delay: 2.5, // Delay the animation by 1 second
+            ease: "power2.out" // Use a smooth ease
+        });
+        gsap.from(".logo, .menu_button, .login-btn", {
+            duration: 0.8,
+            opacity: 0,
+            stagger: 0.3, // Stagger the animations by 0.3 seconds
+            delay: 2.8, // Start the animations after 1.1 seconds
+            ease: "power2.out" // Use a smooth ease
+        });
+        gsap.from(".container-jobpg", {
+            duration:1,
+            opacity: 0,
+            y: 50, // Move down slightly
+            stagger: 0.2, // Add stagger effect for smoother animation
+        });
+
+        gsap.from(".jobpg-logo ", {
+            opacity: 0,
+            delay:0.5,
+            stagger:0.2,
+            delay:0.5,
+            duration: 1,
+            scrollTrigger: {
+                trigger: ".joblisting",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            }
+        });
+
+        gsap.from(".jobpg-h , .jobpg-p , .jobpg-lc , .jobpg-v ", {
+            opacity: 0,
+            x: 20, // Move right slightly
+            duration: 1,
+            delay:1,
+            stagger: 0.2, // Add stagger effect for smoother animation
+            scrollTrigger: {
+                trigger: ".joblisting",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            }
+        });
+        gsap.from(".footer-col", {
+            opacity: 0,
+            y: 50, // Move down slightly
+            duration: 1,
+            stagger: 0.3, // Stagger the animations by 0.3 seconds
+            scrollTrigger: {
+                trigger: ".footer",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            }
+        });
+
+        // Animation for footer links
+        gsap.from(".footer-col ul li", {
+            opacity: 0,
+            y: 30, // Move down slightly
+            duration: 1,
+            stagger: 0.2, // Stagger the animations by 0.2 seconds
+            scrollTrigger: {
+                trigger: ".footer",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            }
+        });
+
+        // Animation for social links
+        gsap.from(".social-links a", {
+            opacity: 0,
+            y: 20, // Move down slightly
+            duration: 1,
+            stagger: 0.2, // Stagger the animations by 0.2 seconds
+            scrollTrigger: {
+                trigger: ".footer",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            }
+        });
+    });
+</script>
+</html>
