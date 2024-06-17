@@ -1,0 +1,251 @@
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+
+.jobpg-logo2 {
+    width: 15vw;
+    height: 8vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.jobpg-logo2 img {
+    margin-left: -10px;
+    height: 8vh;
+    width: 8vh;
+    width: auto;
+}
+
+.jobpg-h2 {
+    font-size: 10px;
+    margin: 10px 0;
+}
+
+.jobpg-p2 {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.jobpg-v2 {
+    width: 15vw;
+    height: 6vh;
+
+}
+
+.jobpg-v2 a {
+    text-decoration: none;
+    width: 8vw;
+    height: 80%;
+    font-size: 16px;
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.jobpg-v2 a:hover {
+    background-color: rgb(238, 238, 238);
+    color: black;
+}
+
+.jobpg-lc2 {
+    font-size: 16px;
+}
+
+.job-detail {
+    width: 100vw;
+    height: auto;
+    position: relative;
+    padding: 0px 0px;
+    margin: 0;
+    display: flex;
+    margin-top: -38vh;
+    z-index: 1;
+    flex-direction: column;
+    background-color: white;
+}
+
+.jb-det-cont {
+    width: 100vw;
+    margin-top: -100px;
+    height: auto;
+    padding: 0px 100px;
+    margin: 0;
+    display: flex;
+    padding-bottom: 100px;
+    flex-direction: row;
+}
+
+.jb-det-cont1 {
+    width: 50vw;
+    height: auto;
+    margin-top: -100px;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    overflow: hidden;
+}
+
+.jb-det-cont2 {
+    width: 30%;
+    padding: 40px 50px;
+    border-radius: 10px;
+    padding-bottom: 60px;
+    margin-left: 50px;
+    display: flex;
+    margin-top: -110px;
+    flex-direction: column;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.212);
+    height: 100%;
+}
+
+.jb-det-cont0 {
+    padding: 0px 100px;
+    width: 100%;
+    height: auto;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 150px;
+}
+
+.jb-det-cont01 {
+    width: 11vh;
+    height: 11vh;
+    padding: 10px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    margin-top: -7vh;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.jb-det-cont01 img {
+    width: auto;
+    height: 10vh;
+}
+
+.jb-det-cont02 {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    justify-content: start;
+    align-items: start;
+}
+
+.jb-det-cont02 h1 {
+    line-height: 10px;
+}
+
+.jb-det-cont02 p {
+    line-height: 0;
+}
+
+.styled-list {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.jb-icon {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    height: 50px;
+    margin: 20px 0px;
+    align-items: center;
+    overflow: hidden;
+}
+
+.jb-icon-cont {
+    height: auto;
+    display: flex;
+    padding-left: 10px;
+    flex-direction: column;
+}
+
+.jb-icon-cont h3 {
+    line-height: 10px;
+    margin: 0;
+    padding-top: 5px;
+}
+
+.jb-icon-cont p {
+    margin: 0;
+    font-size: 15px;
+    padding-top: 5px;
+    font-weight: 300;
+}
+
+
+
+.button1 {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    text-decoration: none;
+
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+.button1 button {
+    margin-top: 30px;
+    width: auto;
+    padding: 0 20px;
+    height: 6vh;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    border: none;
+    background-color: black;
+    text-decoration: none;
+    color: white;
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+.button1 button:hover {
+    background-color: rgba(0, 0, 0, 0.199);
+
+    color: black;
+}
+
+@media(max-width:1300px) {
+    .jb-det-cont{
+        flex-direction: column;
+        padding: 0 0px;
+    }
+    .jb-det-cont0{
+        padding: 0 50px;
+    }
+    .jb-det-cont1{
+        width: 60vw;
+        padding: 0 50px;
+    }
+    .jb-det-cont2 {
+        width: 60%;
+        margin-top: 100px;
+        height: fit-content;
+        margin-bottom: 100px;
+    }
+    
+}

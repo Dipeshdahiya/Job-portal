@@ -1,0 +1,195 @@
+body {
+    background-color: rgb(253, 243, 228);
+
+}
+
+.background {
+    width: 430px;
+    height: 520px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+}
+
+.background .shape {
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    border-radius: 50%;
+}
+
+.shape:first-child {
+    background: linear-gradient(#373a3f,
+            #1b1b1b);
+    left: -125%;
+    top: -28%;
+}
+
+.shape:last-child {
+    background: linear-gradient(to right,
+            #efd89c,
+            #ffdfb3);
+    right: -125%;
+    bottom: -28%;
+}
+
+.container {
+    font-family: 'Poppins', sans-serif;
+    height: auto;
+    font-weight: 500;
+    width: 80vw;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.244);
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+    padding: 50px 35px;
+    
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.input-container {
+    width: 45%;
+    /* Adjust as needed */
+}
+
+.input-container label {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.input-container input,
+.input-container select,
+.input-container textarea {
+    width: calc(100% - 20px);
+    display: block;
+    border: none;
+    min-height: 40px;
+    background-color: rgba(0, 0, 0, 0.07);
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 20px;
+    font-weight: 300;
+}
+.input-container option{
+    font-size: 20px;
+    margin-bottom: 10px;
+    background-color: rgba(0, 0, 0, 0.07);
+    border: none;
+    border-bottom: solid 1px black;
+    
+}
+::placeholder {
+    color: #000000;
+}
+
+.input-container #cv{
+    background-color: transparent;
+}
+
+
+button {
+    margin-top: 20px;
+    width: 400px;
+    background-color: #000000;
+    color: #ffffff;
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+button:hover{
+    background-color: #ddd;
+    color: black;
+}
+
+#custom-button {
+    margin-top: 5px;
+    width: 150px;
+    font-weight: 100;
+    text-align: center;
+    font-size: 16px;
+    letter-spacing: 1.5px;
+    flex-direction: row;
+    height: 35px;
+    padding: 0;
+    color: white;
+    background-color: #000000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+#custom-button:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+#custom-text {
+    margin-left: 10px;
+    font-family: sans-serif;
+    color: #7e7e7e;
+  }
+
+input[type ="file"]{
+    display: none;
+}
+
+
+.back-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000; /* Ensure the button appears on top of other content */
+}
+
+.btn-back {
+    background-color: transparent;
+    color: #000000;
+    padding: 8px 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    text-decoration: none;
+}
+.btn-back i{
+    margin-left: 10px;
+    transition: all 0.3s ease;
+}
+.btn-back:hover i{
+    margin-left: 20px;
+}

@@ -1,0 +1,663 @@
+body {
+    width: 100vw;
+    height: auto;
+    overflow-x: hidden;
+}
+
+.header-job {
+    height: 80vh;
+    width: 100vw;
+    position: sticky;
+    top: 0%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -12vh;
+    padding-top: 12vh;
+}
+
+.header-img-job {
+    width: 100vw;
+    height: 80vh;
+    position: absolute;
+    object-fit: cover;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    z-index: -1;
+    background-color: rgb(159, 153, 153);
+
+}
+
+.header-img-job img {
+    opacity: 0.6;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+
+.header-text-job {
+    width: 300px;
+    height: auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.header-text-job:hover {
+    transform: scale(1.05);
+}
+
+.heading {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333333;
+    margin-top: 10px;
+    margin-bottom: 30px;
+
+}
+
+.subheading {
+    font-size: 16px;
+    color: #555555;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+
+.container-jobpg {
+    width: 80vw;
+    height: 20vh;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.212);
+    /* Set the box shadow */
+    transition: all 0.5s ease-in-out;
+}
+
+.container-jobpg .jobpg-logo {
+    width: 10vh;
+    height: 100%;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-jobpg .jobpg-logo img {
+    width: auto;
+    height: 10vh;
+
+}
+
+.container-jobpg .jobpg-t {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 300px;
+    height: 100%;
+}
+
+.container-jobpg .jobpg-t h1 {
+    font-size: 30px;
+    line-height: 30px;
+    margin-bottom: 0%;
+}
+
+.container-jobpg .jobpg-t p {
+    font-size: 16px;
+}
+
+.container-jobpg .jobpg-lc {
+    width: auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+.container-jobpg .jobpg-v {
+    width: auto;
+    height: 100%;
+    padding-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-jobpg .jobpg-v a {
+    width: 150px;
+    height: 6vh;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: black;
+    text-decoration: none;
+    color: white;
+    transition: all 0.5s ease-in-out;
+}
+
+.container-jobpg .jobpg-v a:hover {
+    background-color: rgba(255, 255, 255, 0.438);
+
+    color: black;
+}
+
+.container-jobpg:hover {
+    background-color: rgb(255, 238, 227);
+}
+
+
+
+.Cot-jb {
+    background-color: rgba(236, 236, 236, 0.313);
+    width: 30vh;
+    height: 35vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 5px 0px;
+    border-radius: 5px;
+    border: solid 1px rgba(0, 0, 0, 0.034);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1),
+        0 6px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.Cot-jb:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2),
+        0 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+.Cot-jb img {
+    width: auto;
+    height: 100px;
+}
+
+.Cot-jb h1 {
+    text-align: center;
+    font-size: 20px;
+    line-height: 20px;
+    width: 200px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container-jobpg {
+    width: 55vw;
+    height: 15vh;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border-radius: 5px;
+    background-color: rgba(236, 236, 236, 0.313);
+    border: solid 1px rgba(0, 0, 0, 0.034);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1),
+        0 6px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.container-jobpg .jobpg-logo {
+    width: 10vh;
+    height: 100%;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-jobpg .jobpg-logo img {
+    width: auto;
+    height: 8vh;
+
+}
+
+.container-jobpg .jobpg-t {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 250px;
+    height: 100%;
+}
+
+.container-jobpg .jobpg-t h1 {
+    font-size: 25px;
+    line-height: 25px;
+    margin-bottom: 0%;
+}
+
+.container-jobpg .jobpg-t p {
+    font-size: 14px;
+}
+
+.container-jobpg .jobpg-lc {
+    width: auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.container-jobpg .jobpg-v {
+    width: auto;
+    height: 100%;
+    padding-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-jobpg .jobpg-v a {
+    width: 120px;
+    height: 5vh;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: black;
+    text-decoration: none;
+    color: white;
+    transition: all 0.5s ease-in-out;
+}
+
+.container-jobpg .jobpg-v a:hover {
+    background-color: rgb(231, 231, 231);
+
+    color: black;
+}
+
+.container-jobpg:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2),
+        0 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Popup styles */
+.popup-content {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent background */
+    z-index: 9999;
+}
+
+.popup-content-inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+/* Adjust this according to your styling */
+.popup-content-inner h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.popup-content-inner p {
+    margin-bottom: 5px;
+}
+
+.Categories-jb {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30vh, 1fr));
+    gap: 20px;
+    /* Adjust the gap between grid items as needed */
+    width: 90%;
+    justify-content: center;
+    margin: 0 auto;
+    /* Center the grid container horizontally */
+    height: auto;
+    /* Let the height be determined by the content */
+}
+
+.Cot-jb {
+    background-color: rgba(236, 236, 236, 0.313);
+    width: 30vh;
+    height: 35vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 5px 0px;
+    border-radius: 5px;
+    border: solid 1px rgba(0, 0, 0, 0.034);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1),
+        0 6px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.Cot-jb:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2),
+        0 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+.Cot-jb img {
+    width: auto;
+    height: 100px;
+}
+
+.Cot-jb h1 {
+    text-align: center;
+    font-size: 20px;
+    line-height: 20px;
+    width: 200px;
+}
+
+.container-jobpg2 {
+    background-color: rgba(236, 236, 236, 0.313);
+    border: solid 1px rgba(0, 0, 0, 0.034);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1),
+        0 6px 6px rgba(0, 0, 0, 0.1);
+    width: 15vw;
+    height: auto;
+    padding: 20px 0px;
+    padding-left: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    margin-bottom: 30px;
+    transition: all 0.3s ease-in-out;
+}
+
+.container-jobpg2:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2),
+        0 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+.jobpg-logo2 {
+    width: 15vw;
+    height: 8vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.jobpg-logo2 img {
+    margin-left: -10px;
+    height: 8vh;
+    width: auto;
+}
+
+.jobpg-h2 {
+    font-size: 10px;
+    margin: 10px 0;
+}
+
+.jobpg-v2 {
+    width: 15vw;
+    height: 6vh;
+}
+
+.jobpg-v2 a {
+    text-decoration: none;
+    width: 8vw;
+    height: 80%;
+    font-size: 16px;
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.jobpg-v2 a:hover {
+    background-color: rgb(238, 238, 238);
+    color: black;
+}
+
+.jobpg-lc2 {
+    font-size: 16px;
+}
+
+.jb-det-cont {
+    width: 100vw;
+    height: auto;
+    padding: 100px 100px;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.jb-det-cont1 {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+}
+
+.jb-det-cont11 {
+    width: 100%;
+    height: 20vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.jb-det-cont111 img {
+    width: auto;
+    height: 10vh;
+}
+
+.jb-det-cont112 {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.full-job-list-cont{
+    display: flex;
+    flex-direction: row; 
+    width: 75vw; 
+    justify-content: baseline;
+}
+.recent-job-listings-cont{
+    margin-left: 80px;
+}
+
+
+/* responsive */
+
+
+@media(max-width:1200px){
+    .joblisting{
+        margin-top: 100px;
+    }
+    .full-job-list-cont{
+        flex-direction: column;
+    }
+    .container-jobpg {
+        width: 100%;
+        height: fit-content;
+        margin-bottom: 20px;
+        align-items: center;
+        justify-content: baseline;
+    }
+    .container-jobpg .jobpg-logo img{
+        height: 6vh;
+    }
+    .container-jobpg .jobpg-t {
+        width: 150px;
+    }
+    .container-jobpg .jobpg-t h1 {
+        font-size: 20px;
+        line-height: 20px;
+        margin-bottom: 0%;
+    }
+    .container-jobpg .jobpg-t p {
+        font-size: 14px;
+    }
+    .container-jobpg .jobpg-v a{
+        width: 80px;
+        height: 4vh;
+        font-size: 10px;
+    }
+    .container-jobpg .jobpg-lc{
+        font-size: 14px;
+    }
+    .job-catg1{
+        margin-top: 100px;
+    }
+    .container-jobpg2 {
+        width: 18vh;
+        height: 25vh;
+        padding: 20px 0px;
+        padding-left: 25px;
+        display: flex;
+        flex-direction: column;
+        gap: 0px;
+        justify-content: space-between;
+        margin-bottom: 30px;
+    }
+    .recent-job-listings{
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(20vh, 0.5fr));
+        gap: 20px;
+        /* Adjust the gap between grid items as needed */
+        width: 100%;
+        
+    }
+    .recent-job-listings-cont{
+        width: 100%;
+        height: auto;
+        margin-left: 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .jobpg-logo2 {
+        width: auto;
+        height: auto;
+        margin-bottom: 0px;
+    }
+    .jobpg-logo2 img {
+        margin-left: 0px;
+        height: 5vh;
+        width: auto;
+    }
+    .jobpg-h2 {
+        font-size: 8px;
+        margin: 10px 0;
+    }
+    .jobpg-lc2 {
+        font-size: 12px;
+    }
+    .jobpg-v2 a {
+        text-decoration: none;
+        width: 65px;
+        height: auto;
+        text-align: center;
+        font-size: 12px;
+        border-radius: 5px;
+        padding: 5px 10px;
+        transition: all 0.3s ease-in-out;
+    }
+    
+}
+@media(max-width: 780px) {
+    .Categories-jb {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(20vh, 1fr));
+        gap: 20px;
+        /* Adjust the gap between grid items as needed */
+        width: 100%;
+    }
+
+    .Cot-jb {
+        background-color: rgba(236, 236, 236, 0.313);
+        width: 20vh;
+        height: 26vh;
+    }
+    .Cot-jb h1 {
+        text-align: center;
+        font-size: 16px;
+        width: 20vh;   
+    }
+    .Cot-jb img {
+        width: auto;
+        height: 60px;
+    }
+    .Cot-jb p {
+        text-align: center;
+        font-size: 14px;
+        width: 20vh;   
+    }  
+    .container-jobpg {
+        width: 100%;
+        height: fit-content;
+        margin-bottom: 20px;
+        align-items: center;
+        justify-content: space-around;
+    }
+    .container-jobpg .jobpg-logo img{
+        height: 6vh;
+    }
+    .container-jobpg .jobpg-t {
+        width: 100px;
+    }
+    .container-jobpg .jobpg-t h1 {
+        font-size: 16px;
+        line-height: 20px;
+        margin-bottom: 0%;
+    }
+    .container-jobpg .jobpg-t p {
+        font-size: 12px;
+    }
+    .container-jobpg .jobpg-v a{
+        width: 80px;
+        height: 4vh;
+        font-size: 10px;
+    }
+    .container-jobpg .jobpg-lc{
+        font-size: 12px;
+    }
+}

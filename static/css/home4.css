@@ -1,0 +1,658 @@
+.benefits-section {
+  max-width: 100vw;
+  height: 30vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #000000;
+  padding: 20px;
+  color: white;
+}
+
+.benefit-block {
+  text-align: center;
+}
+
+.benefit-value {
+  font-size: 2em;
+  font-weight: bold;
+  margin: 0;
+}
+
+.benefit-description {
+  font-size: 1em;
+  margin: 5px 0 0;
+}
+
+.find-job-section {
+  text-align: center;
+  color: black;
+  opacity: 1;
+}
+
+.find-job-section h2 {
+  font-weight: bold;
+  font-size: 1.8em;
+  margin-bottom: 10px;
+}
+
+.find-job-section .description {
+  font-size: 1em;
+  color: #0000007a;
+}
+
+.recent-job-listings {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 25px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.container-jobpg {
+  width: 30vw;
+  height: auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border-radius: 5px;
+  padding: 25px 25px;
+  background-color: rgba(236, 236, 236, 0.313);
+  border: solid 1px rgba(0, 0, 0, 0.034);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1),
+    0 6px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+.container-jobpg .jobpg-logo {
+  width: 10vh;
+  height: 100%;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-jobpg .jobpg-logo img {
+  width: auto;
+  height: 7vh;
+
+}
+
+.container-jobpg .jobpg-t {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  justify-content: baseline;
+
+}
+
+.container-jobpg .jobpg-t h1 {
+  font-size: 1.5em;
+}
+
+.container-jobpg .jobpg-t p {
+  font-size: 1em;
+
+}
+
+.container-jobpg .jobpg-lc {
+  width: auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 1em;
+  gap: 20px;
+  font-size: 14px;
+}
+
+.container-jobpg .jobpg-lc p {
+  font-size: 1em;
+  background-color: rgba(0, 0, 0, 0.11);
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+.container-jobpg .jobpg-v {
+  width: auto;
+  height: 100%;
+  padding-right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container-jobpg .jobpg-v a {
+  width: 120px;
+  height: 5vh;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: black;
+  text-decoration: none;
+  color: white;
+  transition: all 0.5s ease-in-out;
+}
+
+
+
+.view-more-btn {
+  color: rgb(0, 0, 0);
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+  transition: 0.5s;
+  border-radius: 5px;
+  width: auto;
+  position: relative;
+}
+
+.view-more-btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0px;
+  left: 0%;
+  width: 0;
+  height: 1px;
+  background-color: rgb(0, 0, 0);
+  transition: width 0.5s ease, left 0.5s ease;
+}
+
+.view-more-btn:hover::after {
+  width: 95%;
+  left: 0;
+}
+
+.company-logos-section {
+
+  overflow: hidden;
+  /* Hide overflow to make scrolling more smooth */
+  max-width: 100vw;
+  /* Ensure it takes full width */
+}
+
+.company-logos {
+  display: flex;
+  justify-content: space-around;
+  /* Equal space around each logo */
+  padding-left: 20vw;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.logo-container {
+  width: 170px;
+  flex-direction: column;
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  border: solid 1px rgba(0, 0, 0, 0.034);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2),
+    0 10px 10px rgba(0, 0, 0, 0.1);
+  background-color: rgb(255, 255, 255);
+  flex: 0 0 auto;
+  /* Ensure the logo containers do not shrink or grow */
+  margin: 0 10px;
+  /* Adjust margin as needed for spacing */
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.logo-container:hover {
+  transform: translateY(5px);
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1),
+    0 6px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logo-cont2 {
+  position: relative;
+  right: 0;
+}
+
+.company-logos2 {
+  position: relative;
+  right: 0;
+  direction: rtl;
+  display: flex;
+  justify-content: space-around;
+  /* Equal space around each logo */
+  margin-right: 0%;
+  padding-right: 20vw;
+  padding-top: 20px;
+  margin-bottom: 100px;
+
+}
+
+.logo-container img {
+  width: auto;
+  /* Adjust size as needed */
+  height: 60px;
+}
+
+.full-screen-div {
+  max-width: 100vw;
+  height: 100vh;
+  background-color: white;
+  /* Just for visual purposes */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.centered-heading {
+  font-size: 2.5em;
+  /* Adjust the font size as needed */
+  text-align: center;
+  margin-top: 50px;
+  /* Adjust this value to change the margin from the top */
+}
+
+.profile-container {
+  position: absolute;
+  top: calc(100px + 3em);
+  /* Adjust based on the height of the heading */
+  bottom: 150px;
+  /* Adjust based on the height of the review block and its margin */
+  width: 100%;
+  /* Pushes the profile container down */
+}
+
+.profile-image {
+  background-color: black;
+  width: 100px;
+  height: 100px;
+  opacity: 0;
+  border-radius: 50%;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1),
+    0 6px 6px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  cursor: pointer;
+  transition: scale 0.3s ease-in-out;
+}
+
+.profile-image:hover {
+  scale: 1.15;
+}
+
+.profile-image:nth-child(1) {
+  top: 4%;
+  left: 8%;
+}
+
+.profile-image:nth-child(2) {
+  top: 30%;
+  left: 20%;
+}
+
+.profile-image:nth-child(3) {
+  top: 50%;
+  left: 8%;
+}
+
+.profile-image:nth-child(4) {
+  top: 15%;
+  left: 35%;
+}
+
+.profile-image:nth-child(5) {
+  top: 5%;
+  left: 48%;
+}
+
+.profile-image:nth-child(6) {
+  top: 25%;
+  left: 60%;
+}
+
+.profile-image:nth-child(7) {
+  top: -8%;
+  left: 68%;
+}
+
+.profile-image:nth-child(8) {
+  top: 20%;
+  left: 80%;
+}
+
+.profile-image:nth-child(9) {
+  top: 55%;
+  left: 84%;
+}
+
+.profile-image:nth-child(10) {
+  top: 85%;
+  left: 10%;
+}
+
+.profile-image:nth-child(11) {
+  top: 85%;
+  left: 80%;
+}
+
+.profile-image:nth-child(12) {
+  top: -5%;
+  left: 22%;
+}
+
+/* Add more nth-child selectors to position additional images as needed */
+
+.review-block {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 10px;
+  padding: 30px 50px;
+  margin-bottom: 50px;
+  /* Adjust the bottom margin as needed */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2),
+    0 10px 10px rgba(0, 0, 0, 0.1);
+  width: 40%;
+  /* Adjust the width as needed */
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.review-block:hover {
+  transform: translateY(3px);
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1),
+    0 6px 6px rgba(0, 0, 0, 0.1);
+}
+
+.review-profile-image {
+  width: 200px;
+  height: auto;
+  border-radius: 50%;
+  margin-right: 20px;
+  opacity: 0;
+
+}
+
+.review-profile-image.bounce-animation {
+  animation: bounce 0.5s ease;
+  animation-fill-mode: both;
+}
+
+.review-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.review-description {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.review-name {
+  font-size: 1em;
+  color: gray;
+}
+
+@keyframes bounce {
+  0% {
+    transform: scale(0);
+  }
+
+  70% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+.how-it-works-section {
+  text-align: center;
+  padding: 150px 20px;
+  background-color: #ffffff;
+}
+
+.how-it-works-section h2 {
+  font-size: 2.5em;
+  margin-bottom: 75px;
+}
+
+.steps-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 200px;
+}
+
+.step .icon {
+  font-size: 3em;
+  margin-bottom: 0px;
+}
+
+.step h3 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.step p {
+  font-size: 1em;
+  margin: 0;
+  color: gray;
+}
+
+.arrow {
+  font-size: 2em;
+  margin: 0 10px;
+}
+
+@media (max-width: 768px) {
+  .steps-container {
+    flex-direction: column;
+  }
+
+  .arrow {
+    display: none;
+  }
+}
+
+.qa-section {
+  text-align: center;
+  padding: 50px 20px;
+  background-color: white;
+}
+
+.qa-section h2 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+.qa-container {
+  max-width: 70vw;
+
+  margin: 100px auto;
+  text-align: left;
+}
+
+.qa-line {
+  height: 0px;
+  border-top: 2px solid rgba(128, 128, 128, 0.297);
+  width: auto;
+}
+
+.qa-item {
+  margin-bottom: 10px;
+  overflow: hidden;
+
+}
+
+.qa-item .question .icon.plus-icon::after {
+  content: '+';
+  font-size: 1.3em;
+}
+
+.qa-item .question .icon.minus-icon::after {
+  content: '-';
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3em;
+  border-radius: 50%;
+
+}
+
+.qa-item .question {
+  padding: 15px;
+  color: #000000;
+  cursor: pointer;
+  display: flex;
+  font-size: 1.3em;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+.qa-item .answer {
+  width: 80%;
+  color: gray;
+  max-height: 0;
+  font-size: 1em;
+  padding: 0 15px;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.qa-item.expanded .answer {
+  max-height: 300px;
+  /* Adjust this value based on the maximum content height */
+}
+
+.background-section {
+  position: relative;
+  max-width: 100vw;
+
+  overflow: hidden;
+
+  height: 70vh;
+  /* 70% of the viewport height */
+  background-size: contain;
+
+  background-position: center;
+}
+
+.background-section img {
+  position: absolute;
+  left: 0%;
+  bottom: 0%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Custom color with opacity */
+}
+
+.content {
+  position: relative;
+  height: 100%;
+  width: 40%;
+  padding-left: 200px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  justify-content: center;
+}
+
+.content h1 {
+  font-size: 4em;
+  line-height: 1.2em;
+  margin-bottom: 0px;
+}
+
+.content p {
+  font-size: 1.2em;
+  margin-bottom: 30px;
+  color: rgba(255, 255, 255, 0.53);
+}
+
+.content .btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  color: rgb(255, 255, 255);
+  background-color: #000000;
+  /* Custom button color */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.content .btn:hover {
+  color: black;
+  background-color: rgba(255, 255, 255, 0.53);
+  /* Hover color */
+}
+
+@media (max-width: 768px) {
+  .content {
+    padding-left: 100px;
+    width: 50%;
+  }
+
+  .overlay h1 {
+    font-size: 2.5em;
+
+  }
+
+  .overlay p {
+    font-size: 1.2em;
+  }
+
+  .overlay .btn {
+    font-size: 1em;
+  }
+
+  .qa-section h2 {
+    font-size: 2.3em;
+  }
+  .logo-container{
+    width: 120px;
+    height: 125px;
+  }
+  .logo-container img{
+    height: 40px;
+  }
+  .recent-job-listings{
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .container-jobpg{
+    width: 80vw;
+  }
+  .benefits-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+}
